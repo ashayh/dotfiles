@@ -1,0 +1,169 @@
+#!/bin/bash
+
+if source ~/dotfiles/colorize.sh &>/dev/null ; then
+ :
+else
+  echo "~/dotfiles/colorize.sh absent? Continue without color..."
+  echo
+  for func in red green yellow blue bold
+  do
+    eval "$func () { cat - ; }"
+  done
+fi
+
+if [[ ! -d "${HOME}/dotfiles" ]] ; then
+  echo "Create this repo as $HOME/dotfiles" | red
+  echo "Run the following command in your \$HOME:"
+  echo "cd ~ ; git clone https://github.com/ashayh/dotfiles.git"
+  echo "Exiting..."
+  exit 1
+else
+  REPO=$(cd ~/dotfiles; git config --get remote.origin.url 2>/dev/null)
+  if [[ ${REPO} != *ashayh/dotfiles.git ]] ; then
+    echo "~/dotfiles/ is not a git repo or a wrong repo." | red
+    echo "Follow instructions at: https://github.com/ashayh/dotfiles"
+    echo "Exiting..."
+    exit 1
+  fi
+fi
+
+DATE=$(date '+%d-%m-%y-%H-%M-%S')
+
+# These are the commands we will check if present:
+CMDS=(zsh hg curl wget vim unzip)
+
+# These are the dirs we will create if absent:
+MAKE_DIRS=(${HOME}/bin ${HOME}/.vim/backup ${HOME}/.vim/tmp)
+
+# These are the dotfiles we create as links ~/:
+DOTFILES=(.gitconfig .irbrc .tmux.conf .vimrc .zshrc)
+
+# These are the oh-my-zsh customizations,
+# which end up in ~/.oh-my-zsh/custom/ :
+OH_MY_FILES=(aliases.zsh ashay.zsh-theme)
+
+# These are the oh-my-zsh plugin repos to clone:
+OH_MY_PLUGINS=(zsh-users/zsh-syntax-highlighting zsh-users/zsh-history-substring-search)
+
+# These are the files for ~/bin
+# Includes this shell script :
+BIN_FILES=(create_dotfiles_etc)
+
+for cmd in ${CMDS[*]}
+do
+  # Only care if present in \$PATH
+  if which ${cmd} &> /dev/null ; then
+    echo "${cmd} is present at $(which ${cmd})" | green
+  else
+    echo "${cmd} is absent or not in \$PATH. Exiting..." | red
+    exit 1
+  fi
+done
+
+echo
+for dir in ${MAKE_DIRS[*]}
+do
+  if [[ ! -d ${dir} ]] ; then
+    echo "Creating ${dir} ..."
+    mkdir -p ${dir}
+  fi
+done
+
+echo
+# Install oh-my-zsh
+
+if [[ -d ${HOME}/.oh-my-zsh ]] ; then
+  REPO=$(cd ~/.oh-my-zsh ; git config --get remote.origin.url 2>/dev/null)
+  if [[ ${REPO} != *robbyrussell/oh-my-zsh.git ]] ; then
+    echo "${HOME}/.oh-my-zsh exists, but is not a git repo, or wrong repo." | red
+    echo "Install from: https://github.com/robbyrussell/oh-my-zsh.git"
+    echo "Exiting..."
+    exit 1
+  else
+    echo "${HOME}/.oh-my-zsh is the correct git repo (github.com/robbyrussell)." | white | bold
+  fi
+else
+  echo "Installing oh-my-zsh..."
+  curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
+fi
+
+echo
+for PLUG in ${OH_MY_PLUGINS[*]}
+do
+  # Don't need github username for this comparison.
+  PLU_NAME=${PLUG#*/}
+  if [[ -d ${HOME}/.oh-my-zsh/plugins/${PLU_NAME} ]] ; then
+    echo "${HOME}/.oh-my-zsh/plugins/${PLU_NAME} exists already, trying next." | green
+    continue
+  else
+    echo "git cloning ${PLUG}"
+    {
+      cd ${HOME}/.oh-my-zsh/plugins/ ;
+      git clone git://github.com/${PLUG} ;
+    }
+    if [[ $? -ne 0 ]] ; then
+      echo "Error when git cloning git://github.com/${PLUG}" | red
+    fi
+  fi
+done
+
+echo
+# Link ${HOME}/dotfiles files to ${HOME}/bin
+for file in ${BIN_FILES[*]}
+do
+  [[ ! -x ${HOME}/dotfiles/${file} ]] && chmod +x ${HOME}/dotfiles/${file}
+  IL=$(readlink ${HOME}/bin/${file})
+  if [[ ${IL} != "${HOME}/dotfiles/${file}" ]] ; then
+    echo "${IL} ${HOME}/bin/${file} "
+    echo "Creating ${HOME}/bin/${file} as link to ${HOME}/dotfiles/${file}" | blue | bold
+    if [[ -f ${HOME}/bin/${file} ]] ; then
+      mv ${HOME}/bin/${file} /tmp/${file}.${DATE}
+      echo "moved ${HOME}/bin/${file} to /tmp/${file}.${DATE}" | yellow
+    fi
+    echo
+    ln -s ${HOME}/dotfiles/${file} ${HOME}/bin/${file}
+  else
+    echo "${HOME}/bin/${file} is already ${IL}" | green
+  fi
+  IL=''
+done
+
+echo
+# copy dot files to ${HOME}/
+for file in ${DOTFILES[*]}
+do
+  IL=$(readlink ${HOME}/${file})
+  if [[ ${IL} != "${HOME}/dotfiles/${file}" ]] ; then
+    echo "Creating ${HOME}/${file} as link to ${HOME}/dotfiles/${file}" | blue | bold
+    if [[ -f ${HOME}/${file} ]] ; then
+      mv ${HOME}/${file} /tmp/${file}.${DATE}
+      echo "moved ${HOME}/${file} to /tmp/${file}.${DATE}" | yellow
+    fi
+    ln -s ${HOME}/dotfiles/${file} ${HOME}/${file}
+  else
+    echo "${file} is already ${IL}" | green
+  fi
+  IL=''
+done
+
+echo
+# copy files zsh theme and alias
+for file in ${OH_MY_FILES[*]}
+do
+  IL=$(readlink ${HOME}/.oh-my-zsh/custom/${file})
+  if [[ ${IL} != "${HOME}/dotfiles/.${file}" ]] ; then
+    echo "Creating ${HOME}/.oh-my-zsh/custom/${file} as link to ${HOME}/dotfiles/.${file}" | blue | bold
+    if [[ -f ${HOME}/.oh-my-zsh/custom/${file} ]] ; then
+      mv ${HOME}/.oh-my-zsh/custom/${file} /tmp/${file}.${DATE}
+      echo "moved ${HOME}/${file} to /tmp/${file}.${DATE}" | yellow
+    fi
+    ln -s ${HOME}/dotfiles/.${file} ${HOME}/.oh-my-zsh/custom/${file}
+  else
+    echo "${HOME}/.oh-my-zsh/custom/${file} is already ${IL}" | green
+  fi
+  IL=''
+done
+
+echo
+echo " After vim is run for the first time and plugins are clones, Run ~/dotfiles/fixes.sh:"
+# ~/dotfiles/fixes.sh
