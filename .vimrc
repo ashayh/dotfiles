@@ -875,4 +875,5 @@ nnoremap <F5>     :ShowSpaces 1<CR>
 nnoremap <F6>   m`:TrimSpaces<CR>``
 vnoremap <F6>   :TrimSpaces<CR>
 
+match ExtraWhitespace /\s\+\%#\@<!$/
 nnoremap <Leader>wn :match ExtraWhitespace /^\s* \s*\<Bar>\s\+$/<CR>
