@@ -872,5 +872,5 @@ endfunction
 command -bar -nargs=? ShowSpaces call ShowSpaces(<args>)
 command -bar -nargs=0 -range=% TrimSpaces <line1>,<line2>call TrimSpaces()
 nnoremap <F5>     :ShowSpaces 1<CR>
-nnoremap <S-F5>   m`:TrimSpaces<CR>``
-vnoremap <S-F5>   :TrimSpaces<CR>
+nnoremap <F6>   m`:TrimSpaces<CR>``
+vnoremap <F6>   :TrimSpaces<CR>
