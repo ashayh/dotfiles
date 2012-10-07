@@ -874,3 +874,5 @@ command -bar -nargs=0 -range=% TrimSpaces <line1>,<line2>call TrimSpaces()
 nnoremap <F5>     :ShowSpaces 1<CR>
 nnoremap <F6>   m`:TrimSpaces<CR>``
 vnoremap <F6>   :TrimSpaces<CR>
+
+nnoremap <Leader>wn :match ExtraWhitespace /^\s* \s*\<Bar>\s\+$/<CR>
