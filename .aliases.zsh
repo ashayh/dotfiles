@@ -47,6 +47,11 @@ alias 644='chmod 644'
 alias 755='chmod 755'
 alias grep='grep --color=auto'
 
+alias gco='git co'
+alias gss='git ss'
+alias glg='git lg'
+alias gdiff='git diff'
+
 kd () {
   lineno=$1
   if [[ ${lineno} == "" ]]

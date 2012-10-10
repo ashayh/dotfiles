@@ -61,10 +61,25 @@ do
 done
 
 echo
+if [[ -d ${HOME}/.vim && ! -f ${HOME}/.vim/.ashay_dotfiles ]] ; then
+  echo "\${HOME}/.vim exists but was not created by this script: \${HOME}/.vim/.ashay_dotfiles is absent?" | yellow | bold
+  echo "Moving ${HOME}/.vim to /tmp/dot_vim.${DATE}" | yellow | bold
+  mv ${HOME}/.vim /tmp/dot_vim.${DATE}
+  echo "Copy /tmp/dot_vim.${DATE} back to your \$HOME to restore old vim config." | yellow | bold
+else
+  echo "\${HOME}/.vim exists and was created by this script: \${HOME}/.vim/.ashay_dotfiles is present" | blue | bold
+fi
+
+echo
+echo "Making ${HOME}/.vim only if absent..." | green | bold
+[[ ! -d $HOME/.vim ]] && mkdir ${HOME}/.vim
+
+touch ${HOME}/.vim/.ashay_dotfiles
+
 for dir in ${MAKE_DIRS[*]}
 do
   if [[ ! -d ${dir} ]] ; then
-    echo "Creating ${dir} ..."
+    echo "Creating ${dir} as it is absent..." | blue | bold
     mkdir -p ${dir}
   fi
 done
@@ -164,6 +179,6 @@ do
   IL=''
 done
 
-echo
-echo " After vim is run for the first time and plugins are clones, Run ~/dotfiles/fixes.sh:"
+echo "All done." | green | bold
+echo "After vim is run for the first time and plugins are cloned, Run ~/dotfiles/fixes.sh:" | green | bold
 # ~/dotfiles/fixes.sh

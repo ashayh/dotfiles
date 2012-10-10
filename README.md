@@ -40,7 +40,7 @@ This also installs packages via apt.
 
   **Note:** The cloning of all repos takes a few minutes, until which the screen sometimes may be blank/unresponsive.
 
-### What does it do?
+### How does it work?
  Check the `create_dotfiles_etc` script for the variables described below.
 
 * Checks if `~/dotfiles` exists, and is this repo (ashayh/dotfile.git)
@@ -50,6 +50,8 @@ This also installs packages via apt.
 * Adds to .oh-my-zsh/custom via `$OH_MY_FILES`
 * Adds to .oh-my-zsh/plugins via `$OH_MY_PLUGINS`
 * Adds scripts to ~/bin from this repo via `$BIN_FILES`
+**Note: Existing configs and dirs will be moved to /tmp**
+
 
 #### .zshrc
 This is standard rc from [.oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh) with a few more plugins and shortcuts.
