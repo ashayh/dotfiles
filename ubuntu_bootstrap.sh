@@ -1,5 +1,11 @@
 if which apt-get &>/dev/null ; then
-  :
+  if apt-cache search mercurial | grep '^mercurial' &>/dev/null ; then
+    :
+  else
+    echo "apt-get cannot find some repos. Check your /etc/apt/sources.list?"
+    echo "exiting..."
+    exit 1
+  fi
 else
   echo "apt-get is not present, is this debian/ubuntu?"
   echo "exiting..."
@@ -14,9 +20,9 @@ apt-get install -y ${PKGS[*]}
 
 echo
 if [[ $? -eq 0 ]] ; then
-  echo "apt-get -y ${PKGS[*]} successful..."
+  echo "apt-get -y install ${PKGS[*]} successful..."
 else
-  echo "apt-get -y ${PKGS[*]} failed..exiting..."
+  echo "apt-get -y install ${PKGS[*]} failed..exiting..."
   exit 1
 fi
 
