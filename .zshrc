@@ -77,3 +77,6 @@ setopt interactivecomments
 setopt noclobber
 
 autoload -U zargs
+
+ZSH_HIGHLIGHT_STYLES[single-quoted-argument]=fg=blue,bold
+ZSH_HIGHLIGHT_STYLES[double-quoted-argument]=fg=cyan,bold
