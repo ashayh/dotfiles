@@ -70,9 +70,6 @@ bindkey '^g' backward-kill-word
 
 #function command_not_found_handler() {echo "command not found: $*";}
 
-alias git='nocorrect git'
-alias 'glg'='git lg'
-
 setopt interactivecomments
 setopt noclobber
 

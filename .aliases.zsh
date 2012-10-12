@@ -14,17 +14,7 @@ alias _='sudo'
 # Show history
 alias history='fc -l 1'
 
-# List direcory contents
-alias lsa='ls -lah'
-alias l='ls -laF'
-alias ll='ls -l'
-alias sl=ls # often screw this up
-
 alias afind='ack-grep -il'
-
-# ~/.bash_aliases, instead of adding them here directly.
-# enable color support of ls and also add handy aliases
-# enable color support of ls and also add handy aliases
 
 if [ "$TERM" != "dumb" ]; then
   eval "`dircolors -b`"
@@ -39,14 +29,18 @@ alias vdir='ls --color=auto --format=long'
 # some more ls aliases
 alias ll='ls -l'
 alias la='ls -A'
-alias l='ls -CF'
+alias l='ls -laF'
+alias lsa='ls -lah'
 alias lh='ls -lh'
+alias sl=ls # often screw this up
 alias mx='chmod a+x'
 alias 000='chmod 000'
 alias 644='chmod 644'
 alias 755='chmod 755'
 alias grep='grep --color=auto'
 
+alias git='nocorrect git'
+alias glg='git lg'
 alias gco='git co'
 alias gss='git ss'
 alias glg='git lg'
