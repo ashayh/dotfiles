@@ -849,3 +849,7 @@ inoremap <C-L> <C-O>:nohls<CR>
 nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
 
 set wrap
+
+" If you edited a file as non-root,
+" WR will write the file as root
+command WR w !sudo tee % > /dev/null
