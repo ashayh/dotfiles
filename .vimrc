@@ -68,6 +68,7 @@ fun! SetupVAM()
   \ 'L9',
   \ 'matchit.zip',
   \ 'github:vim-scripts/xhtml.vim--Grny',
+  \ 'github:vim-scripts/mathml.vim',
   \ 'github:vim-scripts/IndexedSearch',
   \ 'github:wincent/Command-T',
   \ 'github:christoomey/vim-space',
