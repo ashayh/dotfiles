@@ -79,5 +79,7 @@ ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
 
 ZSH_HIGHLIGHT_STYLES[single-quoted-argument]=fg=blue,bold
 ZSH_HIGHLIGHT_STYLES[double-quoted-argument]=fg=cyan,bold
+ZSH_HIGHLIGHT_STYLES[globbing]=fg=green,bold
+ZSH_HIGHLIGHT_STYLES[reserved-word]=fg=magenta,bold
 
 ZSH_HIGHLIGHT_PATTERNS+=('rm -rf *' 'fg=white,bold,bg=red')
