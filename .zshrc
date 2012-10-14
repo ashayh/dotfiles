@@ -70,10 +70,16 @@ bindkey '^g' backward-kill-word
 
 #function command_not_found_handler() {echo "command not found: $*";}
 
-alias git='nocorrect git'
-alias 'glg'='git lg'
-
 setopt interactivecomments
 setopt noclobber
 
 autoload -U zargs
+
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
+
+ZSH_HIGHLIGHT_STYLES[single-quoted-argument]=fg=blue,bold
+ZSH_HIGHLIGHT_STYLES[double-quoted-argument]=fg=cyan,bold
+ZSH_HIGHLIGHT_STYLES[globbing]=fg=green,bold
+ZSH_HIGHLIGHT_STYLES[reserved-word]=fg=magenta,bold
+
+ZSH_HIGHLIGHT_PATTERNS+=('rm -rf *' 'fg=white,bold,bg=red')
