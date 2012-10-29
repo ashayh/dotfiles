@@ -2,7 +2,8 @@ if which apt-get &>/dev/null ; then
   if apt-cache search mercurial | grep '^mercurial' &>/dev/null ; then
     :
   else
-    echo "apt-get cannot find some repos. Check your /etc/apt/sources.list?"
+    echo "apt-cache cannot find some packages from your repos."
+    echo "Check your /etc/apt/sources.list ?"
     echo "exiting..."
     exit 1
   fi
@@ -12,10 +13,18 @@ else
   exit 1
 fi
 
-PKGS=(git zsh mercurial curl wget vim unzip)
-
+PKGS=(git grc zsh mercurial curl wget vim unzip)
 echo
 echo "Installing ${PKGS[*]}..."
+
+if lsof -t /var/lib/dpkg/lock >&/dev/null ; then
+  :
+else
+  echo "Cannot install packages: Another process has dpkg lock."
+  echo "exiting..."
+  exit 1
+fi
+
 apt-get install -y ${PKGS[*]}
 
 echo

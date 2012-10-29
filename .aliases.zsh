@@ -37,7 +37,18 @@ alias mx='chmod a+x'
 alias 000='chmod 000'
 alias 644='chmod 644'
 alias 755='chmod 755'
+
 alias grep='grep --color=auto'
+alias rbgrep='grep -R --include="*.rb" '
+alias ignore_comment_grep='grep -E -v "^#|^$"'
+
+alias pgrepf='pgrep -fl'
+
+alias lnetstat='netstat -letupn'
+alias anetstat='netstat -an'
+
+alias treed='tree -fFAd'
+alias tree='tree -fFA'
 
 alias git='nocorrect git'
 alias glg='git lg'
