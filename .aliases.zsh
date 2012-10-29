@@ -42,6 +42,8 @@ alias grep='grep --color=auto'
 alias rbgrep='grep -R --include="*.rb" '
 alias ignore_comment_grep='grep -E -v "^#|^$"'
 
+alias pgrepf='pgrep -fl'
+
 alias lnetstat='netstat -letupn'
 alias anetstat='netstat -an'
 
