@@ -3,13 +3,12 @@ require 'rubygems'
 require 'ap' # Awesome Print
 require 'net-http-spy' # Print information about any HTTP requests being made
 
-require 'boson' # Load libraries from the Boson command framework
-Boson.start :verbose => false
-
 # ASCII table views
-require 'hirb/import_object'
+require 'hirb'
 Hirb.enable
 extend Hirb::Console
+
+require 'boson' # Load libraries from the Boson command framework
 
 IRB.conf[:USE_READLINE] = true
 IRB.conf[:AUTO_INDENT]  = false

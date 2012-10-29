@@ -854,3 +854,5 @@ set wrap
 " If you edited a file as non-root,
 " WR will write the file as root
 command WR w !sudo tee % > /dev/null
+
+au BufNewFile,BufRead *.ini,*.conf set filetype=dosini

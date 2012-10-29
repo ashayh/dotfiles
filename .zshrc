@@ -36,6 +36,7 @@ source $ZSH/oh-my-zsh.sh
 # Customize to your needs...
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+PATH=$PATH:$HOME/.rvm/bin
 
 export TERM='xterm-256color'
 
@@ -83,3 +84,6 @@ ZSH_HIGHLIGHT_STYLES[globbing]=fg=green,bold
 ZSH_HIGHLIGHT_STYLES[reserved-word]=fg=magenta,bold
 
 ZSH_HIGHLIGHT_PATTERNS+=('rm -rf *' 'fg=white,bold,bg=red')
+
+zstyle ':completion:*:manuals' separate-sections true
+zstyle ':completion:*:descriptions' format $'%{\e[0;31m%}completing %B%d%b%{\e[0m%}'''
