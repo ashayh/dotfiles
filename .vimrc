@@ -116,8 +116,7 @@ fun! SetupVAM()
   \ 'github:tomtom/quickfixsigns_vim',
   \ 'github:honza/snipmate-snippets',
   \ 'github:garbas/vim-snipmate',
-  \ 'github:quentindecock/vim-cucumber-align-pipes',
-  \ 'github:rodjek/vim-puppet'],{'auto_install' : 1})
+  \ 'github:quentindecock/vim-cucumber-align-pipes'], {'auto_install' : 1})
 
   " sample: call vam#ActivateAddons(['pluginA','pluginB', ...], {'auto_install' : 0})
 

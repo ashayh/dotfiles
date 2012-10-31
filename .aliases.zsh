@@ -57,6 +57,9 @@ alias gss='git ss'
 alias glg='git lg'
 alias gdiff='git diff'
 
+# TODO:
+# Add puppet related aliases
+
 kd () {
   lineno=$1
   if [[ ${lineno} == "" ]]
