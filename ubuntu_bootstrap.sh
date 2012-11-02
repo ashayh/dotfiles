@@ -25,7 +25,8 @@ else
   :
 fi
 
-apt-get install -y ${PKGS[*]}
+echo "Enter passwd for sudo:"
+sudo apt-get install -y ${PKGS[*]}
 
 echo
 if [[ $? -eq 0 ]] ; then
