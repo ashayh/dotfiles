@@ -13,7 +13,7 @@ else
   exit 1
 fi
 
-PKGS=(git grc zsh mercurial curl wget vim unzip)
+PKGS=(curl git grc mercurial tmux vim unzip wget zsh)
 echo
 echo "Installing ${PKGS[*]}..."
 
@@ -57,4 +57,8 @@ if [[ $? -eq 0 ]] ; then
   echo "All done."
 else
   echo "script exited with errors."
+  exit 1
 fi
+
+echo "Running zsh:"
+zsh
