@@ -43,6 +43,7 @@ alias rbgrep='grep -R --include="*.rb" '
 alias ignore_comment_grep='grep -E -v "^#|^$"'
 
 alias pgrepf='pgrep -fl'
+alias faux='ps faux'
 
 alias lnetstat='netstat -letupn'
 alias anetstat='netstat -an'

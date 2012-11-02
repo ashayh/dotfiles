@@ -18,11 +18,11 @@ echo
 echo "Installing ${PKGS[*]}..."
 
 if lsof -t /var/lib/dpkg/lock >&/dev/null ; then
-  :
-else
   echo "Cannot install packages: Another process has dpkg lock."
   echo "exiting..."
   exit 1
+else
+  :
 fi
 
 apt-get install -y ${PKGS[*]}
