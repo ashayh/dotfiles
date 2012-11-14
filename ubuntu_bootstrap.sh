@@ -13,19 +13,20 @@ else
   exit 1
 fi
 
-PKGS=(git grc zsh mercurial curl wget vim unzip)
+PKGS=(curl git grc mercurial tmux vim unzip wget zsh)
 echo
 echo "Installing ${PKGS[*]}..."
 
 if lsof -t /var/lib/dpkg/lock >&/dev/null ; then
-  :
-else
   echo "Cannot install packages: Another process has dpkg lock."
   echo "exiting..."
   exit 1
+else
+  :
 fi
 
-apt-get install -y ${PKGS[*]}
+echo "Enter passwd for sudo:"
+sudo apt-get install -y ${PKGS[*]}
 
 echo
 if [[ $? -eq 0 ]] ; then
@@ -56,4 +57,8 @@ if [[ $? -eq 0 ]] ; then
   echo "All done."
 else
   echo "script exited with errors."
+  exit 1
 fi
+
+echo "Running zsh:"
+zsh

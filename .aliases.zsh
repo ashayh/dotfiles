@@ -43,6 +43,7 @@ alias rbgrep='grep -R --include="*.rb" '
 alias ignore_comment_grep='grep -E -v "^#|^$"'
 
 alias pgrepf='pgrep -fl'
+alias faux='ps faux'
 
 alias lnetstat='netstat -letupn'
 alias anetstat='netstat -an'
@@ -56,6 +57,9 @@ alias gco='git co'
 alias gss='git ss'
 alias glg='git lg'
 alias gdiff='git diff'
+
+# TODO:
+# Add puppet related aliases
 
 kd () {
   lineno=$1
