@@ -78,12 +78,52 @@ autoload -U zargs
 
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
 
+#ZSH_HIGHLIGHT_STYLES+=(
+#  default                       'none'
+#  unknown-token                 'fg=red,bold'
+#  reserved-word                 'fg=yellow'
+#  alias                         'fg=none,bold'
+#  builtin                       'fg=none,bold'
+#  function                      'fg=none,bold'
+#  command                       'fg=none,bold'
+#  hashed-command                'fg=none,bold'
+#  path                          'fg=cyan'
+#  globbing                      'fg=cyan'
+#  history-expansion             'fg=blue'
+#  single-hyphen-option          'fg=magenta'
+#  double-hyphen-option          'fg=magenta'
+#  back-quoted-argument          'fg=magenta,bold'
+#  single-quoted-argument        'fg=green'
+#  double-quoted-argument        'fg=green'
+#  dollar-double-quoted-argument 'fg=cyan'
+#  back-double-quoted-argument   'fg=cyan'
+#  assign                        'none'
+#)
+
 ZSH_HIGHLIGHT_STYLES[single-quoted-argument]=fg=blue,bold
 ZSH_HIGHLIGHT_STYLES[double-quoted-argument]=fg=cyan,bold
 ZSH_HIGHLIGHT_STYLES[globbing]=fg=green,bold
 ZSH_HIGHLIGHT_STYLES[reserved-word]=fg=magenta,bold
+ZSH_HIGHLIGHT_STYLES[single-hyphen-option]=fg=magenta,bold
+ZSH_HIGHLIGHT_STYLES[double-hyphen-option]=fg=magenta,bold
 
 ZSH_HIGHLIGHT_PATTERNS+=('rm -rf *' 'fg=white,bold,bg=red')
 
 zstyle ':completion:*:manuals' separate-sections true
 zstyle ':completion:*:descriptions' format $'%{\e[0;31m%}completing %B%d%b%{\e[0m%}'''
+
+# Invoke GnuPG-Agent the first time we login.
+# If it exists, use this:
+if test -f $HOME/.gpg-agent-info && \
+  kill -0 `cut -d: -f 2 $HOME/.gpg-agent-info` 2>/dev/null; then
+  GPG_AGENT_INFO=`cat $HOME/.gpg-agent-info | cut -c 16-`
+  GPG_TTY=`tty`
+  export GPG_TTY
+  export GPG_AGENT_INFO
+# Otherwise, it either hasn't been started, or was killed:
+else
+  eval `gpg-agent --daemon --no-grab --write-env-file $HOME/.gpg-agent-info`
+  GPG_TTY=`tty`
+  export GPG_TTY
+  export GPG_AGENT_INFO
+fi
