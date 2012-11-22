@@ -115,7 +115,7 @@ zstyle ':completion:*:descriptions' format $'%{\e[0;31m%}completing %B%d%b%{\e[0
 # Invoke GnuPG-Agent the first time we login.
 # If it exists, use this:
 if test -f $HOME/.gpg-agent-info && \
-  kill -0 `cut -d: -f 2 $HOME/.gpg-agent-info` 2>/dev/null; then
+  kill -0 `grep '^GPG_AGENT_INFO' $HOME/.gpg-agent-info | cut -d: -f 2` 2>/dev/null; then
   GPG_AGENT_INFO=`cat $HOME/.gpg-agent-info | cut -c 16-`
   GPG_TTY=`tty`
   export GPG_TTY
