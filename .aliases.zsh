@@ -72,7 +72,7 @@ kd () {
 }
 
 
-gr ()  {
+ssh_root ()  {
   host=$1
   if [[ ${host} == "" ]]
   then

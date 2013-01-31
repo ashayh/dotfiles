@@ -19,7 +19,7 @@ if [[ ! -d "${HOME}/dotfiles" ]] ; then
   exit 1
 else
   REPO=$(cd ~/dotfiles; git config --get remote.origin.url 2>/dev/null)
-  if [[ ${REPO} != *ashayh/dotfiles.git ]] ; then
+  if [[ ${REPO} != *ashayh/dotfiles* ]] ; then
     echo "~/dotfiles/ is not a git repo or a wrong repo." | red
     echo "Follow instructions at: https://github.com/ashayh/dotfiles"
     echo "Exiting..."
