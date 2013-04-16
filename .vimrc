@@ -114,7 +114,7 @@ fun! SetupVAM()
   \ 'github:tpope/vim-endwise',
   \ 'github:vim-scripts/YankRing.vim',
   \ 'github:tomtom/quickfixsigns_vim',
-  \ 'github:honza/snipmate-snippets',
+  \ 'github:honza/vim-snippets',
   \ 'github:garbas/vim-snipmate',
   \ 'github:kien/rainbow_parentheses.vim',
   \ 'github:quentindecock/vim-cucumber-align-pipes'], {'auto_install' : 1})
