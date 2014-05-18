@@ -127,3 +127,20 @@ zstyle ':completion:*:descriptions' format $'%{\e[0;31m%}completing %B%d%b%{\e[0
 #   export GPG_TTY
 #   export GPG_AGENT_INFO
 # fi
+
+tmuxHashColor() {
+  local hsh=$(echo $1 | cksum | cut -d ' ' -f 1)
+  local num=$(expr $hsh % 255)
+  echo "colour$num"
+}
+
+ns() {
+  if [ -z $1 ]; then
+    1=$(basename $(pwd))
+  fi
+  tmux new-session -d -s $1
+  local color=$(tmuxHashColor $1)
+  tmux send-keys -t $1 "tmux set-option status-bg $color" C-m
+  tmux send-keys -t $1 "clear" C-m
+  tmux attach -t $1
+}

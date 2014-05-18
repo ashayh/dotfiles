@@ -131,3 +131,5 @@ alias cbhs="cat $HISTFILE | tail -n 1 | cb"
 alias pryc="pry -r ./config/environment"
 alias clijson="ruby -e 'require \"rubygems\";require \"json\"; require \"ap\"; j = JSON.parse(STDIN.gets); ap j'"
 alias es_doc_count="ruby -e 'require \"rubygems\";require \"json\"; require \"ap\"; j = JSON.parse(STDIN.gets); ap j[\"_all\"][\"primaries\"][\"docs\"]'"
+
+alias hh="\history -i 0 -1"
