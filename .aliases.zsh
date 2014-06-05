@@ -133,3 +133,7 @@ alias clijson="ruby -e 'require \"rubygems\";require \"json\"; require \"ap\"; j
 alias es_doc_count="ruby -e 'require \"rubygems\";require \"json\"; require \"ap\"; j = JSON.parse(STDIN.gets); ap j[\"_all\"][\"primaries\"][\"docs\"]'"
 
 alias hh="\history -i 0 -1"
+
+alias faux="ps faux"
+
+alias pgrep="pgrep -f"
