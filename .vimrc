@@ -87,7 +87,7 @@ fun! SetupVAM()
   \ 'github:tpope/vim-fugitive',
   \ 'github:godlygeek/tabular',
   \ 'github:mileszs/ack.vim',
-  \ 'github:mattn/zencoding-vim',
+  \ 'github:mattn/emmet-vim',
   \ 'github:swaroopch/vim-markdown-preview',
   \ 'github:xolox/vim-session',
   \ 'github:Raimondi/delimitMate',
