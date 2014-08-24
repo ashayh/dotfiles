@@ -13,7 +13,7 @@ else
   exit 1
 fi
 
-PKGS=(curl git grc mercurial tmux vim unzip wget zsh)
+PKGS=(curl git grc mercurial source-highlight tmux vim unzip wget zsh)
 echo
 echo "Installing ${PKGS[*]}..."
 

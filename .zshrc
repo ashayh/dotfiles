@@ -144,3 +144,6 @@ ns() {
   tmux send-keys -t $1 "clear" C-m
   tmux attach -t $1
 }
+
+export LESSOPEN="| /usr/share/source-highlight/src-hilite-lesspipe.sh %s"
+export LESS=' -R '

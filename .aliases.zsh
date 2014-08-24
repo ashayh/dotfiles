@@ -137,3 +137,5 @@ alias hh="\history -i 0 -1"
 alias faux="ps faux"
 
 alias pgrep="pgrep -f"
+
+alias paux="ps aux --noheader |  awk '$3 > 1.0 || $8 !~ /S/ {print $3,$8,$11}' | sort -nr"
