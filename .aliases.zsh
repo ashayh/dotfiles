@@ -139,3 +139,5 @@ alias faux="ps faux"
 alias pgrep="pgrep -f"
 
 alias paux="ps aux --noheader |  awk '$3 > 1.0 || $8 !~ /S/ {print $3,$8,$11}' | sort -nr"
+
+alias tml='tmux list-sessions'
