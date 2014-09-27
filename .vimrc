@@ -118,6 +118,7 @@ fun! SetupVAM()
   \ 'github:honza/vim-snippets',
   \ 'github:garbas/vim-snipmate',
   \ 'github:kien/rainbow_parentheses.vim',
+  \ 'github:fatih/vim-go',
   \ 'github:quentindecock/vim-cucumber-align-pipes'], {'auto_install' : 1})
 
   " sample: call vam#ActivateAddons(['pluginA','pluginB', ...], {'auto_install' : 0})
