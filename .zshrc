@@ -155,5 +155,5 @@ export PATH=$PATH:$GOPATH/bin
 
 if which chef >/dev/null 2>&1
 then
-  eval "$(chef shell-init $SHELL)"
+  eval "$(chef shell-init $(basename $SHELL))"
 fi
