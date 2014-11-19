@@ -17,15 +17,25 @@ alias history='fc -l 1'
 alias afind='ack-grep -il'
 
 if [ "$TERM" != "dumb" ]; then
-  eval "`dircolors -b`"
-  alias ls='ls --color=auto'
-  #alias dir='ls --color=auto --format=vertical'
-  #alias vdir='ls --color=auto --format=long'
+  if [[ "$(uname)" == "Darwin" ]]
+  then
+    alias ls='ls -G'
+  else
+    eval "`dircolors -b`"
+    alias ls='ls --color=auto'
+  fi
 fi
 
-alias ls='ls --color=auto'
-alias dir='ls --color=auto --format=vertical'
-alias vdir='ls --color=auto --format=long'
+if [[ "$(uname)" == "Darwin" ]]
+then
+  alias ls='ls -G'
+else
+  eval "`dircolors -b`"
+  alias ls='ls --color=auto'
+  alias dir='ls --color=auto --format=vertical'
+  alias vdir='ls --color=auto --format=long'
+fi
+
 # some more ls aliases
 alias ll='ls -l'
 alias la='ls -A'
