@@ -15,7 +15,7 @@ else
   fi
 fi
 
-export HOMEBREW_GITHUB_API_TOKEN=8fcdd3f392cb18f17604a6d3c8f70634cac30f63 
+export HOMEBREW_GITHUB_API_TOKEN=XX 
 
 PKGS=(curl git grc mercurial source-highlight tmux wget)
 echo
