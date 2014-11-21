@@ -42,6 +42,7 @@ alias la='ls -A'
 alias l='ls -laF'
 alias lsa='ls -lah'
 alias lh='ls -lh'
+alias ltr='ls -ltra'
 alias sl=ls # often screw this up
 alias mx='chmod a+x'
 alias 000='chmod 000'
