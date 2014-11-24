@@ -76,7 +76,7 @@ fun! SetupVAM()
   \ 'github:Lokaltog/vim-easymotion',
   \ 'github:kien/ctrlp.vim',
   \ 'github:nathanaelkane/vim-indent-guides',
-  \ 'github:Lokaltog/vim-powerline',
+  \ 'github:bling/vim-airline',
   \ 'github:scrooloose/nerdtree',
   \ 'github:Rykka/colorv.vim',
   \ 'github:nanotech/jellybeans.vim',
@@ -604,18 +604,6 @@ endif
 nnoremap <leader>u :CtrlPCurFile<CR>
 nnoremap <leader>m :CtrlPMRUFiles<CR>
 nnoremap <leader>b :CtrlPBuffer<CR>
-
-" ---------------
-" Powerline
-" ---------------
-" Keep ^B from showing on Windows in Powerline
-if has('win32') || has('win64')
-  let g:Powerline_symbols = 'compatible'
-elseif has('gui_macvim')
-  let g:Powerline_symbols = 'fancy'
-endif
-let g:Powerline_symbols = 'unicode'
-call Pl#Theme#InsertSegment('ws_marker', 'after', 'lineinfo')
 
 " ---------------
 " jellybeans.vim colorscheme tweaks
