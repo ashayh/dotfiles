@@ -29,6 +29,7 @@ fi
 if [[ "$(uname)" == "Darwin" ]]
 then
   alias ls='ls -G'
+  alias autossh='autossh -M $(($RANDOM%6400 + 1024))'
 else
   eval "`dircolors -b`"
   alias ls='ls --color=auto'
