@@ -150,7 +150,7 @@ export LESS='-XF -R '
 
 # go lang
 [[ -s "/root/.gvm/scripts/gvm" ]] && source "/root/.gvm/scripts/gvm"
-export GOPATH=$HOME/go/
+export GOPATH=~/go/
 export PATH=$PATH:${GOPATH}bin
 
 if which chef >/dev/null 2>&1
