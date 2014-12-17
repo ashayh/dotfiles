@@ -155,3 +155,5 @@ alias paux="ps aux --noheader |  awk '$3 > 1.0 || $8 !~ /S/ {print $3,$8,$11}' |
 alias tml='tmux list-sessions'
 
 alias gbuild="go build"
+
+alias ass="autossh"
