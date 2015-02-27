@@ -49,6 +49,7 @@ export EC2_HOME=${HOME}/aws/ec2-api-tools
 
 export PATH=$PATH:${EC2_HOME}/bin:${AWS_IAM_HOME}/bin
 
+export AWS_CREDENTIAL_FILE=${HOME}/aws/.aws-creds
 
 zlewidget() {
  zle -N $2 $3
