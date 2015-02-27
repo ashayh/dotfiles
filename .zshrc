@@ -35,12 +35,20 @@ source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
 
+export JAVA_HOME=$(/usr/libexec/java_home)
+
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 PATH=$PATH:$HOME/.rvm/bin
 
 export TERM='xterm-256color'
 
 export PATH=$PATH:~/bin
+
+export AWS_IAM_HOME=${HOME}/aws/iamcli
+export EC2_HOME=${HOME}/aws/ec2-api-tools
+
+export PATH=$PATH:${EC2_HOME}/bin:${AWS_IAM_HOME}/bin
+
 
 zlewidget() {
  zle -N $2 $3
