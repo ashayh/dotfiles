@@ -20,6 +20,20 @@ IRB.conf[:SAVE_HISTORY] = 10000
 IRB.conf[:HISTORY_FILE] = "#{ENV['HOME']}/.irb-save-history"
 
 # Enable colored output
-require 'wirble'
-Wirble.init
-Wirble.colorize
+begin
+  require 'wirble'
+  Wirble.init
+  Wirble.colorize
+rescue LoadError => err
+  warn "Couldn't load wirble: #{err}"
+end
+
+begin
+  require 'brice'
+
+  Brice.init do |config|
+    config.include 'colours'
+  end
+rescue LoadError => err
+  warn "Couldn't load brice: #{err}"
+end
