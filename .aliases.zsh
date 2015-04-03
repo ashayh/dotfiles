@@ -38,12 +38,12 @@ else
 fi
 
 # some more ls aliases
-alias ll='ls -l'
+alias ll='ls -laF'
 alias la='ls -A'
-alias l='ls -laF'
+alias l='ls -lF'
 alias lsa='ls -lah'
 alias lh='ls -lh'
-alias ltr='ls -ltra'
+alias ltr='ls -ltr'
 alias sl=ls # often screw this up
 alias mx='chmod a+x'
 alias 000='chmod 000'
