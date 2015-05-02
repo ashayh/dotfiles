@@ -1,0 +1,4 @@
+#!/bin/bash
+
+echo autossh -M $(($RANDOM%6400 + 1024)) -i $1 ec2-user@$3 -o proxycommand="ssh -i $1 -W %h:%p ec2-user@$2"
+autossh -M $(($RANDOM%6400 + 1024)) -i $1 ec2-user@$3 -o proxycommand="ssh -i $1 -W %h:%p ec2-user@$2"

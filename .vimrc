@@ -120,6 +120,7 @@ fun! SetupVAM()
   \ 'github:kien/rainbow_parentheses.vim',
   \ 'github:fatih/vim-go',
   \ 'github:xolox/vim-misc',
+  \ 'github:sjl/gundo.vim',
   \ 'github:quentindecock/vim-cucumber-align-pipes'], {'auto_install' : 1})
 
   " sample: call vam#ActivateAddons(['pluginA','pluginB', ...], {'auto_install' : 0})
@@ -879,3 +880,5 @@ au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
+
+nnoremap <F6> :GundoToggle<CR>
