@@ -10,6 +10,7 @@
 This also installs packages via apt.
 
 `wget --no-check-certificate https://github.com/ashayh/dotfiles/raw/master/ubuntu_bootstrap.sh -O - | bash`
+
 `curl -L https://github.com/ashayh/dotfiles/raw/master/ubuntu_bootstrap.sh | bash`
 
 ##### Manual Install:
