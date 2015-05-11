@@ -33,7 +33,7 @@ DATE=$(date '+%d-%m-%y-%H-%M-%S')
 CMDS=(zsh hg curl wget vim unzip)
 
 # These are the dirs we will create if absent:
-MAKE_DIRS=(${HOME}/bin ${HOME}/.vim/backup ${HOME}/.vim/tmp ${HOME}/.tmux/plugins)
+MAKE_DIRS=(${HOME}/bin ${HOME}/.vim/backup ${HOME}/.vim/tmp ${HOME}/.tmux/plugins ${HOME}/.git/git-templates/hooks)
 
 # These are the dotfiles we create as links ~/:
 DOTFILES=(.gitconfig .irbrc .tmux.conf .vimrc .zshrc)
