@@ -33,7 +33,7 @@ DATE=$(date '+%d-%m-%y-%H-%M-%S')
 CMDS=(zsh hg curl wget vim unzip)
 
 # These are the dirs we will create if absent:
-MAKE_DIRS=(${HOME}/bin ${HOME}/.vim/backup ${HOME}/.vim/tmp)
+MAKE_DIRS=(${HOME}/bin ${HOME}/.vim/backup ${HOME}/.vim/tmp ${HOME}/.tmux/plugins)
 
 # These are the dotfiles we create as links ~/:
 DOTFILES=(.gitconfig .irbrc .tmux.conf .vimrc .zshrc)
@@ -75,6 +75,10 @@ echo "Making ${HOME}/.vim only if absent..." | green | bold
 [[ ! -d $HOME/.vim ]] && mkdir ${HOME}/.vim
 
 touch ${HOME}/.vim/.ashay_dotfiles
+
+# install plug, a vim plugin manager
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 for dir in ${MAKE_DIRS[*]}
 do
@@ -178,6 +182,10 @@ do
   fi
   IL=''
 done
+
+# TMUX plugins:
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
 
 echo "All done." | green | bold
 echo "After vim is run for the first time and plugins are cloned, Run ~/dotfiles/fixes.sh:" | green | bold

@@ -7,145 +7,75 @@
 set nocompatible " be iMproved
 filetype off     " required!
 
-let g:vim_addon_manager = {
-    \'shell_commands_run_method': 'system',
-    \'auto_install': 1,
-    \'log_to_buf': 1,
-    \'log_buffer_name': '/tmp/vam_install.log',
-    \}
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall
+endif
 
-fun! EnsureVamIsOnDisk(plugin_root_dir)
-  " windows users may want to use http://mawercer.de/~marc/vam/index.php
-  " to fetch VAM, VAM-known-repositories and the listed plugins
-  " without having to install curl, 7-zip and git tools first
-  " -> BUG [4] (git-less installation)
-  let vam_autoload_dir = a:plugin_root_dir.'/vim-addon-manager/autoload'
-  if isdirectory(vam_autoload_dir)
-    return 1
-  else
-    if 1 == confirm("Clone VAM into ".a:plugin_root_dir."?","&Y\n&N")
-      " I'm sorry having to add this reminder. Eventually it'll pay off.
-      call confirm("Remind yourself that most plugins ship with ".
-                  \"documentation (README*, doc/*.txt). It is your ".
-                  \"first source of knowledge. If you can't find ".
-                  \"the info you're looking for in reasonable ".
-                  \"time ask maintainers to improve documentation")
-      call mkdir(a:plugin_root_dir, 'p')
-      execute '!git clone --depth=1 git://github.com/MarcWeber/vim-addon-manager '.
-                  \       shellescape(a:plugin_root_dir, 1).'/vim-addon-manager'
-      " VAM runs helptags automatically when you install or update 
-      " plugins
-      exec 'helptags '.fnameescape(a:plugin_root_dir.'/vim-addon-manager/doc')
-    endif
-    return isdirectory(vam_autoload_dir)
-  endif
-endfun
-
-fun! SetupVAM()
-  " Set advanced options like this:
-  " let g:vim_addon_manager = {}
-  " let g:vim_addon_manager.key = value
-  "     Pipe all output into a buffer which gets written to disk
-  " let g:vim_addon_manager.log_to_buf =1
-
-  " Example: drop git sources unless git is in PATH. Same plugins can
-  " be installed from www.vim.org. Lookup MergeSources to get more control
-  " let g:vim_addon_manager.drop_git_sources = !executable('git')
-  " let g:vim_addon_manager.debug_activation = 1
-
-  " VAM install location:
-  let c = get(g:, 'vim_addon_manager', {})
-  let g:vim_addon_manager = c
-  let c.plugin_root_dir = expand('$HOME/.vim/vim-addons', 1)
-  if !EnsureVamIsOnDisk(c.plugin_root_dir)
-    echohl ErrorMsg | echomsg "No VAM found!" | echohl NONE
-    return
-  endif
-  let &rtp.=(empty(&rtp)?'':',').c.plugin_root_dir.'/vim-addon-manager'
-
-  " Tell VAM which plugins to fetch & load:
-  " call vam#ActivateAddons([], {'auto_install' : 0})
-  call vam#ActivateAddons(['github:vim-scripts/ZoomWin',
-  \ 'L9',
-  \ 'matchit.zip',
-  \ 'github:vim-scripts/xhtml.vim--Grny',
-  \ 'github:vim-scripts/mathml.vim',
-  \ 'github:vim-scripts/IndexedSearch',
-  \ 'github:wincent/Command-T',
-  \ 'github:christoomey/vim-space',
-  \ 'github:Lokaltog/vim-easymotion',
-  \ 'github:kien/ctrlp.vim',
-  \ 'github:nathanaelkane/vim-indent-guides',
-  \ 'github:bling/vim-airline',
-  \ 'github:scrooloose/nerdtree',
-  \ 'github:Rykka/colorv.vim',
-  \ 'github:nanotech/jellybeans.vim',
-  \ 'github:tomtom/quickfixsigns_vim',
-  \ 'github:scrooloose/nerdcommenter',
-  \ 'github:tpope/vim-surround',
-  \ 'github:tpope/vim-speeddating',
-  \ 'github:tpope/vim-fugitive',
-  \ 'github:godlygeek/tabular',
-  \ 'github:mileszs/ack.vim',
-  \ 'github:mattn/emmet-vim',
-  \ 'github:swaroopch/vim-markdown-preview',
-  \ 'github:xolox/vim-session',
-  \ 'github:Raimondi/delimitMate',
-  \ 'github:scrooloose/syntastic',
-  \ 'github:ervandew/supertab',
-  \ 'github:gregsexton/MatchTag',
-  \ 'github:Shougo/neocomplcache',
-  \ 'github:vim-ruby/vim-ruby',
-  \ 'github:tpope/vim-haml',
-  \ 'github:tpope/vim-rails',
-  \ 'github:tpope/vim-rake',
-  \ 'github:pangloss/vim-javascript',
-  \ 'github:kchmck/vim-coffee-script',
-  \ 'github:leshill/vim-json',
-  \ 'github:itspriddle/vim-jquery',
-  \ 'github:nono/vim-handlebars',
-  \ 'github:mutewinter/nginx.vim',
-  \ 'github:timcharper/textile.vim',
-  \ 'github:ChrisYip/Better-CSS-Syntax-for-Vim',
-  \ 'github:acustodioo/vim-tmux',
-  \ 'github:groenewege/vim-less',
-  \ 'github:kana/vim-textobj-user',
-  \ 'github:nelstrom/vim-textobj-rubyblock',
-  \ 'github:tpope/vim-repeat',
-  \ 'github:tpope/vim-endwise',
-  \ 'github:vim-scripts/YankRing.vim',
-  \ 'github:tomtom/quickfixsigns_vim',
-  \ 'github:honza/vim-snippets',
-  \ 'github:garbas/vim-snipmate',
-  \ 'github:kien/rainbow_parentheses.vim',
-  \ 'github:fatih/vim-go',
-  \ 'github:xolox/vim-misc',
-  \ 'github:sjl/gundo.vim',
-  \ 'github:quentindecock/vim-cucumber-align-pipes'], {'auto_install' : 1})
-
-  " sample: call vam#ActivateAddons(['pluginA','pluginB', ...], {'auto_install' : 0})
-
-  " Addons are put into vam_install_path/plugin-name directory
-  " unless those directories exist. Then they are activated.
-  " Activating means adding addon dirs to rtp and do some additional
-  " magic
-
-  " How to find addon names?
-  " - look up source from pool
-  " - (<c-x><c-p> complete plugin names):
-  " You can use name rewritings to point to sources:
-  "    ..ActivateAddons(["github:foo", .. => github://foo/vim-addon-foo
-  "    ..ActivateAddons(["github:user/repo", .. => github://user/repo
-  " Also see section "2.2. names of addons and addon sources" in VAM's documentation
-endfun
-call SetupVAM()
-" experimental [E1]: load plugins lazily depending on filetype, See
-" NOTES
-" experimental [E2]: run after gui has been started (gvim) [3]
-" option1:  au VimEnter * call SetupVAM()
-" option2:  au GUIEnter * call SetupVAM()
-" See BUGS sections below [*]
-" Vim 7.0 users see BUGS section [3]
+call plug#begin('~/.vim/plugged')
+Plug 'vim-scripts/ZoomWin'
+Plug 'eparreno/vim-l9'
+Plug 'tmhedberg/matchit'
+Plug 'vim-scripts/xhtml.vim--Grny'
+Plug 'vim-scripts/mathml.vim'
+Plug 'vim-scripts/IndexedSearch'
+Plug 'wincent/Command-T'
+Plug 'christoomey/vim-space'
+Plug 'Lokaltog/vim-easymotion'
+Plug 'kien/ctrlp.vim'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'bling/vim-airline'
+Plug 'bling/vim-bufferline'
+Plug 'scrooloose/nerdtree'
+Plug 'Rykka/colorv.vim'
+Plug 'nanotech/jellybeans.vim'
+Plug 'tomtom/quickfixsigns_vim'
+Plug 'scrooloose/nerdcommenter'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-speeddating'
+Plug 'tpope/vim-fugitive'
+Plug 'godlygeek/tabular'
+Plug 'mileszs/ack.vim'
+Plug 'mattn/emmet-vim'
+Plug 'swaroopch/vim-markdown-preview'
+Plug 'xolox/vim-session'
+Plug 'Raimondi/delimitMate'
+Plug 'scrooloose/syntastic'
+Plug 'ervandew/supertab'
+Plug 'gregsexton/MatchTag'
+Plug 'Shougo/neocomplcache'
+Plug 'vim-ruby/vim-ruby'
+Plug 'tpope/vim-haml'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-rake'
+Plug 'pangloss/vim-javascript'
+Plug 'kchmck/vim-coffee-script'
+Plug 'leshill/vim-json'
+Plug 'itspriddle/vim-jquery'
+Plug 'nono/vim-handlebars'
+Plug 'mutewinter/nginx.vim'
+Plug 'timcharper/textile.vim'
+Plug 'ChrisYip/Better-CSS-Syntax-for-Vim'
+Plug 'acustodioo/vim-tmux'
+Plug 'groenewege/vim-less'
+Plug 'kana/vim-textobj-user'
+Plug 'nelstrom/vim-textobj-rubyblock'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-endwise'
+Plug 'vim-scripts/YankRing.vim'
+Plug 'tomtom/quickfixsigns_vim'
+Plug 'honza/vim-snippets'
+Plug 'garbas/vim-snipmate'
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'kien/rainbow_parentheses.vim'
+Plug 'fatih/vim-go'
+Plug 'nsf/gocode'
+Plug 'xolox/vim-misc'
+Plug 'sjl/gundo.vim'
+Plug 'junegunn/vim-easy-align'
+Plug 'quentindecock/vim-cucumber-align-pipes'
+call plug#end()
 
 " Automatically detect file types. (must turn on after Vundle)
 filetype plugin indent on
