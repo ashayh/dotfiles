@@ -45,4 +45,7 @@ for((bg=40;bg<=47;bg++)); do
 done
 
 echo
-echo
+
+for i in {0..255} ; do
+  printf "\x1b[38;5;${i}mcolour${i}\n"
+done
