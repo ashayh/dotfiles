@@ -60,3 +60,7 @@
 	trustExitCode = true
 [init]
 	templatedir = ~/.git/git-templates/
+[github "intuit"]
+	com = qbo
+[hub]
+	protocol = git
