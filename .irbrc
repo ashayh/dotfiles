@@ -1,3 +1,4 @@
+# all gems must be installed, else silent fail
 require 'rubygems'
 require 'interactive_editor'
 
@@ -15,3 +16,6 @@ IRB.conf[:SAVE_HISTORY] = 10000
 IRB.conf[:HISTORY_FILE] = "#{ENV['HOME']}/.irb-save-history"
 
 require 'irbtools'
+require 'irbtools/configure'
+# Here you can modify the libraries using the methods below
+Irbtools.start
