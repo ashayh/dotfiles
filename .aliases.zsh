@@ -73,13 +73,20 @@ alias gdiff='git diff'
 # TODO:
 # Add puppet related aliases
 
+if [[ $(uname) == "Darwin" ]]
+then
+  SED=$(which gsed)
+else
+  SED=$(which sed)
+fi
+
 kd () {
   lineno=$1
   if [[ ${lineno} == "" ]]
   then
     echo "Provide line no to delete."
   else
-    sed -i ${lineno}d ${HOME}/.ssh/known_hosts
+    ${SED} -i ${lineno}d ${HOME}/.ssh/known_hosts
   fi
 }
 
