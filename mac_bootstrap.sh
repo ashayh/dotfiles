@@ -15,9 +15,9 @@ else
   fi
 fi
 
-export HOMEBREW_GITHUB_API_TOKEN=XX 
+export HOMEBREW_GITHUB_API_TOKEN=XX
 
-PKGS=(curl git grc mercurial source-highlight tmux wget)
+PKGS=(curl git grc mercurial source-highlight tmux wget httpie jq hub gnu-sed cheat awscli autossh packer grc vimpager ssh-copy-id)
 echo
 echo "Installing ${PKGS[*]}..."
 
