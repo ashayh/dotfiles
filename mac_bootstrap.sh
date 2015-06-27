@@ -17,7 +17,7 @@ fi
 
 export HOMEBREW_GITHUB_API_TOKEN=XX
 
-PKGS=(curl git grc mercurial source-highlight tmux wget httpie jq hub gnu-sed cheat awscli autossh packer grc vimpager ssh-copy-id)
+PKGS=(curl git grc mercurial source-highlight tmux wget httpie jq hub gnu-sed cheat awscli autossh packer grc vimpager ssh-copy-id git-extras)
 echo
 echo "Installing ${PKGS[*]}..."
 
