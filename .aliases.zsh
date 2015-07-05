@@ -164,3 +164,5 @@ alias tml='tmux list-sessions'
 alias gbuild="go build"
 
 alias ass="autossh"
+
+alias vp="vimpager"
