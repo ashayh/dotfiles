@@ -178,3 +178,5 @@ setTerminalText () {
 stt_both  () { setTerminalText 0 $@; }
 stt_tab   () { setTerminalText 1 $@; }
 stt_title () { setTerminalText 2 $@; }
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

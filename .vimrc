@@ -20,7 +20,6 @@ Plug 'tmhedberg/matchit'
 Plug 'vim-scripts/xhtml.vim--Grny'
 Plug 'vim-scripts/mathml.vim'
 Plug 'vim-scripts/IndexedSearch'
-Plug 'wincent/Command-T'
 Plug 'christoomey/vim-space'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'kien/ctrlp.vim'
@@ -76,6 +75,12 @@ Plug 'xolox/vim-misc'
 Plug 'sjl/gundo.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'quentindecock/vim-cucumber-align-pipes'
+Plug 'tpope/vim-tbone'
+Plug 'dyng/ctrlsf.vim'
+Plug 'junegunn/vim-peekaboo'
+Plug 'honza/dockerfile.vim'
+Plug 'tomtom/tcomment_vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 call plug#end()
 
 " Automatically detect file types. (must turn on after Vundle)
@@ -349,7 +354,7 @@ nmap <silent> <leader>sc :close<CR>
 " -----------------------------------------------------------
 
 " Underline the current line with '='
-nmap <silent> <leader>ul :t.\|s/./-/g\|:nohls<cr>
+nmap <silent> <leader>lu :t.\|s/./-/g\|:nohls<cr>
 " format the entire file
 nmap <leader>fef ggVG=
 
@@ -480,54 +485,32 @@ nmap <Leader>gx :wincmd h<CR>:q<CR>
 nmap <silent> <leader>wo :ZoomWin<CR>
 
 " ---------------
-" Command T and ctrlp.vim
+" ctrlp.vim
 " ---------------
 " Ensure Ctrl-P isn't bound by default
 let g:ctrlp_map = ''
 
 " Ensure max height isn't too large. (for performance)
 let g:ctrlp_max_height = 10
-let g:CommandTMaxHeight = 10
+" --------
+" Use ctrlp.vim
+" --------
 
-" Set the default escape keybinding to, you guessed it, escape.
-let g:CommandTCancelMap = '<esc>'
-
-" Dynamically use Command T or ctrlp.vim based on availability of Ruby.
-" We do this because Command T is much faster than ctrlp.vim.
-if has('ruby')
-  " --------
-  " Use Command T since we've got Ruby
-  " --------
-
-  " Conditional Mappings
-  if has('unix')
-    nnoremap <silent><C-t> :CommandT<CR>
-  else
-    nnoremap <silent><M-t> :CommandT<CR>
-  endif
-
-  " Leader Commands
-  nnoremap <leader>t :CommandT<CR>
+" Conditional Mappings
+if has('unix')
+  let g:ctrlp_map = '<C-t>'
 else
-  " --------
-  " Use ctrlp.vim since we don't have Ruby
-  " --------
-
-  " Conditional Mappings
-  if has('unix')
-    let g:ctrlp_map = '<C-t>'
-  else
-    let g:ctrlp_map = '<M-t>'
-  endif
-
-  " Leader Commands
-  nnoremap <leader>t :CtrlPRoot<CR>
-  nnoremap <leader>b :CtrlPBuffer<CR>
+  let g:ctrlp_map = '<M-t>'
 endif
+
+" Leader Commands
+nnoremap <leader>t :CtrlPRoot<CR>
+nnoremap <leader>b :CtrlPBuffer<CR>
 
 " Always use CtrlP for most recently used files and relative dierctory.
 if has('unix')
   nnoremap <silent><C-u> :CtrlPCurFile<CR>
+  nnoremap <silent><C-t> :CtrlPCurFile<CR>
 else
   nnoremap <silent><M-u> :CtrlPCurFile<CR>
 endif
@@ -574,13 +557,6 @@ let g:SwapParametersSuppressPythonWarning=1
 " ---------------
 nmap <Leader>md :MarkdownPreview<CR>
 vmap <Leader>md :MarkdownPreview<CR>
-
-" ---------------
-" Vundle
-" ---------------
-nmap <Leader>bi :BundleInstall<CR>
-nmap <Leader>bu :BundleInstall!<CR> " Because this also updates
-nmap <Leader>bc :BundleClean<CR>
 
 " ----------------------------------------
 " Functions
@@ -760,7 +736,7 @@ endfunction
 let g:yankring_history_dir = '$HOME/.vim'
 let g:yankring_manual_clipboard_check = 0
 
-nnoremap <C-y> :YRShow<cr>
+nnoremap <C-J> :YRShow<cr>
 
 let g:html_indent_inctags = "html,body,head,tbody"
 let g:html_indent_script1 = "inc"
@@ -813,3 +789,13 @@ au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
 nnoremap <F6> :GundoToggle<CR>
+nnoremap <F3> ::FZF<CR>
+nnoremap <F4> ::NERDTreeToggle<CR>
+
+autocmd InsertLeave * :set number
+autocmd InsertLeave * :set norelativenumber
+autocmd InsertEnter * :set relativenumber
+au FocusLost * :set number
+au FocusGained * :set relativenumber
+
+nnoremap <silent><leader>n :set relativenumber!<cr>

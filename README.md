@@ -80,9 +80,10 @@ Shortcuts direct in .vimrc:
 8. .swp files placed in ~/.vim/tmp
 9. `g{1,2}` to move between windows. `gx` to swap.
 10. Capital Q and W made lower case. Disable visual mode with cap Q.
+2. `F3` to search with FZF in current directory
 
 ##### Read more about plugin based shortcuts on each plugins website.
-Plugins managed in by VAM [vim addon manager](https://github.com/MarcWeber/vim-addon-manager.git).
+Plugins managed in by Plugged use :PlugInstall to install plugins
 My favourite plugin based shortcuts:
 
 1. `,t= ,t>` Tabularize on `= and >`
@@ -99,4 +100,4 @@ My favourite plugin based shortcuts:
 7. `Ctrl + A`  Increment num, `Ctrl + X` Decrement num, speeddating plugin.
 8. Syntax check for various languages with syntastic plugin.
 9. Add `end` and close brackets/quotes in languages etc.
-10. `,t` for Cmd-T. Choose file then `Ctrl+t or s or v` to open it in a Tab, os split window.
+10. `,t` for Ctrl+P. Choose file then `Ctrl+t or s or v` to open it in a Tab, os split window.
