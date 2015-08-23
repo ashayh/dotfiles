@@ -80,6 +80,7 @@ Plug 'dyng/ctrlsf.vim'
 Plug 'junegunn/vim-peekaboo'
 Plug 'honza/dockerfile.vim'
 Plug 'tomtom/tcomment_vim'
+Plug 'tpope/vim-eunuch'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 call plug#end()
 
@@ -789,6 +790,10 @@ au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
 nnoremap <F6> :GundoToggle<CR>
+let g:gundo_width = 50
+let g:gundo_preview_height = 40
+
+
 nnoremap <F3> ::FZF<CR>
 nnoremap <F4> ::NERDTreeToggle<CR>
 
@@ -799,3 +804,14 @@ au FocusLost * :set number
 au FocusGained * :set relativenumber
 
 nnoremap <silent><leader>n :set relativenumber!<cr>
+
+nnoremap <Leader>d :Gdiff<CR>
+
+" ----------------------------------------------------------------------------
+" Markdown headings
+" ----------------------------------------------------------------------------
+nnoremap <leader>1 m`yypVr=``
+nnoremap <leader>2 m`yypVr-``
+nnoremap <leader>3 m`^i### <esc>``4l
+nnoremap <leader>4 m`^i#### <esc>``5l
+nnoremap <leader>5 m`^i##### <esc>``6l
