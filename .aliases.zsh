@@ -60,8 +60,8 @@ alias faux='ps faux'
 alias lnetstat='netstat -letupn'
 alias anetstat='netstat -an'
 
-alias treed='tree -fFAd'
-alias tree='tree -fFA'
+alias treed='tree -fFaAdC'
+alias tree='tree -fFaAC'
 
 alias git='nocorrect git'
 alias glg='git lg'
