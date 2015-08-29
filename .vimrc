@@ -81,6 +81,7 @@ Plug 'junegunn/vim-peekaboo'
 Plug 'honza/dockerfile.vim'
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-eunuch'
+Plug 'kshenoy/vim-signature'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 call plug#end()
 
