@@ -412,7 +412,7 @@ let g:syntastic_auto_loc_list=1
 let g:syntastic_error_symbol='✗'
 let g:syntastic_warning_symbol='⚠'
 let g:syntastic_mode_map = { 'mode': 'active',
-                           \ 'active_filetypes': ['ruby', 'puppet'],
+                           \ 'active_filetypes': ['ruby', 'puppet', 'sh', 'python', 'chef'],
                            \ 'passive_filetypes': [] }
 
 " Platform-specific config files
