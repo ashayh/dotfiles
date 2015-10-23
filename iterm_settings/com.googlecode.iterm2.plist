@@ -118,7 +118,7 @@
 	<key>NSWindow Frame SUStatusFrame</key>
 	<string>677 451 384 129 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>1440 41 1193 836 1440 -540 2560 1417 </string>
+	<string>81 -76 1193 851 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>183 68 570 401 0 0 1440 877 </string>
 	<key>New Bookmarks</key>
@@ -1399,7 +1399,7 @@
 	<key>NoSyncTimeOfLastPromo</key>
 	<real>453329747.25537002</real>
 	<key>NoSyncTimeOfLastPromoDownload</key>
-	<real>461227995.53539902</real>
+	<real>465122815.14561701</real>
 	<key>OnlyWhenMoreTabs</key>
 	<true/>
 	<key>OpenArrangementAtStartup</key>
@@ -1464,7 +1464,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2015-08-14T06:51:33Z</date>
+	<date>2015-09-29T04:43:59Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SavePasteHistory</key>
@@ -1494,6 +1494,7 @@
 		<string>Jobs</string>
 		<string>Notes</string>
 		<string>Paste History</string>
+		<string>Profiles</string>
 	</array>
 	<key>TripleClickSelectsFullWrappedLines</key>
 	<false/>
