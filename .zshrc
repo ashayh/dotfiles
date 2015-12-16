@@ -40,7 +40,7 @@ export JAVA_HOME=$(/usr/libexec/java_home)
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 PATH=$PATH:$HOME/.rvm/bin
 
-export TERM='xterm-256color'
+export TERM='screen-256color'
 
 export PATH=$PATH:~/bin
 
