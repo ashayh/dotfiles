@@ -5,7 +5,7 @@ function rvm_p_info() {
   echo "[$ruby_version] "
 }
 
-PROMPT='$fg_bold[green][ $FG[105]%D{%a %b-%e-%Y} $FG[192] %* $fg_bold[green]] $(git_prompt_info)$fg[magenta] $(~/.rvm/bin/rvm-prompt 2> /dev/null) $fg[cyan]%n@$fg[green]%m: $FG[209]%~ $reset_color
+PROMPT='$fg_bold[green][ $FG[105]%D{%a %b-%e-%Y} $FG[192] %* $fg_bold[green]]$([[ -f .git/config ]] && git-radar --zsh --fetch)$fg[magenta] $(~/.rvm/bin/rvm-prompt 2> /dev/null) $fg[cyan]%n@$fg[green]%m: $FG[209]%~ $reset_color
 # '
 
 RPS1="${return_code}"
