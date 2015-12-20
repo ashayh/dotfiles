@@ -60,5 +60,8 @@ else
   exit 1
 fi
 
+mkdir -p .vim
+cd ~/.vim && git clone https://github.com/michaeldfallen/git-radar .git-radar
+
 echo "Running zsh:"
 zsh
