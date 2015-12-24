@@ -69,6 +69,8 @@ alias gco='git co'
 alias gss='git ss'
 alias glg='git lg'
 alias gdiff='git diff'
+alias gdw='git diff --color-words=. --color '
+alias gdh='git diff --color | ~/.git/diff-highlight'
 
 # TODO:
 # Add puppet related aliases

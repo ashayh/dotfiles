@@ -182,11 +182,6 @@ done
 # TMUX plugins:
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
-
-echo "All done." | green | bold
-echo "After vim is run for the first time and plugins are cloned, Run ~/dotfiles/fixes.sh:" | green | bold
-# ~/dotfiles/fixes.sh
-
 IL=$(readlink ${HOME}/.fzf.zsh)
 if [[ ${IL} == "${HOME}/dotfiles/.fzf.zsh" ]] ; then
   :
@@ -194,3 +189,9 @@ else
   rm -f ~/.fzf.zsh
   ln -s ~/dotfiles/.fzf.zsh ~/.fzf.zsh
 fi
+
+cp ~/dotfiles/diff-highlight ~/.git/
+
+echo "All done." | green | bold
+echo "After vim is run for the first time and plugins are cloned, Run ~/dotfiles/fixes.sh:" | green | bold
+# ~/dotfiles/fixes.sh
