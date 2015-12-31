@@ -66,5 +66,14 @@ mkdir -p .vim
 cd ~/.vim 
 test -d .git-radar/.git || git clone https://github.com/michaeldfallen/git-radar .git-radar
 
+cd
+if [[ -f ~/.fzf/.git ]] ; then
+  :
+else
+  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+  ~/.fzf/install
+fi
+cd
+
 echo "Running zsh:"
 zsh

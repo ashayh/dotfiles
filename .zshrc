@@ -171,9 +171,9 @@ fi
 DISABLE_AUTO_TITLE="true"
 
 setTerminalText () {
-    # echo works in bash & zsh
-    local mode=$1 ; shift
-    echo -ne "\033]$mode;$@\007"
+  # echo works in bash & zsh
+  local mode=$1 ; shift
+  echo -ne "\033]$mode;$@\007"
 }
 stt_both  () { setTerminalText 0 $@; }
 stt_tab   () { setTerminalText 1 $@; }
