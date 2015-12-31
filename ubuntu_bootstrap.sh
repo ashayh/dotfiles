@@ -1,3 +1,5 @@
+#!/bin/bash
+
 if which apt-get &>/dev/null ; then
   if apt-cache search mercurial | grep '^mercurial' &>/dev/null ; then
     :
@@ -13,7 +15,7 @@ else
   exit 1
 fi
 
-PKGS=(curl git grc mercurial source-highlight ruby-dev tmux vim unzip wget zsh tree shellcheck autossh vimpager ssh-copy-id git-extras nmap httpie unrar wireshark )
+PKGS=(curl git grc mercurial source-highlight ruby-dev tmux vim unzip wget zsh tree shellcheck autossh git-extras nmap httpie unrar wireshark build-essential cmake python2.7-dev git-flow)
 echo
 echo "Installing ${PKGS[*]}..."
 
@@ -61,7 +63,8 @@ else
 fi
 
 mkdir -p .vim
-cd ~/.vim && git clone https://github.com/michaeldfallen/git-radar .git-radar
+cd ~/.vim 
+test -d .git-radar/.git || git clone https://github.com/michaeldfallen/git-radar .git-radar
 
 echo "Running zsh:"
 zsh

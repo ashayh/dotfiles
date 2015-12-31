@@ -179,9 +179,6 @@ do
   IL=''
 done
 
-# TMUX plugins:
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-
 IL=$(readlink ${HOME}/.fzf.zsh)
 if [[ ${IL} == "${HOME}/dotfiles/.fzf.zsh" ]] ; then
   :
@@ -191,6 +188,29 @@ else
 fi
 
 cp ~/dotfiles/diff-highlight ~/.git/
+
+set -e
+# TMUX plugins:
+if [[ -d ~/.tmux/plugins/tpm/.git ]] ; then
+  echo "~/.tmux/plugins/tpm/.git exists" | green
+else
+  echo "cloning ~/.tmux/plugins/tpm/ ..." | green
+  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+fi
+
+mkdir -p ~/.vim/plugged
+cd ~/.vim/plugged
+if [[ -d YouCompleteMe/.git ]] ; then
+  echo "~/.vim/plugged/YouCompleteMe/.git exists" | green
+else
+  echo "cloning ~/.vim/plugged/YouCompleteMe/ ..." | green
+  git clone https://github.com/Valloric/YouCompleteMe.git
+  cd YouCompleteMe/
+  echo "compiling youcompleteme libraries..." | green
+  ./install.py --clang-completer
+fi
+set +e
+cd
 
 echo "All done." | green | bold
 echo "After vim is run for the first time and plugins are cloned, Run ~/dotfiles/fixes.sh:" | green | bold
