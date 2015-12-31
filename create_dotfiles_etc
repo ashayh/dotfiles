@@ -206,6 +206,7 @@ else
   echo "cloning ~/.vim/plugged/YouCompleteMe/ ..." | green
   git clone https://github.com/Valloric/YouCompleteMe.git
   cd YouCompleteMe/
+  git submodule update --init --recursive
   echo "compiling youcompleteme libraries..." | green
   ./install.py --clang-completer
 fi
