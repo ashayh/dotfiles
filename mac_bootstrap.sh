@@ -1,3 +1,5 @@
+#!/bin/bash
+
 if which brew &>/dev/null ; then
   :
 else
