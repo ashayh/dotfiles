@@ -51,10 +51,6 @@ else
 fi
 
 echo
-echo "Running ~/dotfiles/create_dotfiles_etc..."
-~/dotfiles/create_dotfiles_etc
-
-echo
 if [[ $? -eq 0 ]] ; then
   echo "All done."
 else
@@ -77,3 +73,7 @@ cd
 
 echo "Running zsh:"
 zsh
+
+echo
+echo "Running ~/dotfiles/create_dotfiles_etc..."
+~/dotfiles/create_dotfiles_etc
