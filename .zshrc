@@ -35,7 +35,9 @@ source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
 
-export JAVA_HOME=$(/usr/libexec/java_home)
+if [[ -d /usr/libexec/java_home ]] ; then
+  export JAVA_HOME=$(/usr/libexec/java_home)
+fi
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 PATH=$PATH:$HOME/.rvm/bin
@@ -183,7 +185,7 @@ stt_title () { setTerminalText 2 $@; }
 
 export PATH=$PATH:$HOME/.vim/.git-radar
 
-CHRUBY_FILES(/usr/local/share/chruby/chruby.sh /usr/local/share/chruby/auto.sh)
+CHRUBY_FILES=(/usr/local/share/chruby/chruby.sh /usr/local/share/chruby/auto.sh)
 for i in ${CHRUBY_FILES[@]}
 do
   if [[ -f ${i} ]]; then
