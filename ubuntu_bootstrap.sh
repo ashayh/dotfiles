@@ -79,7 +79,7 @@ tar -xzvf chruby-${CHRUBY_VER}.tar.gz
 cd chruby-${CHRUBY_VER}/
 sudo ./scripts/setup.sh
 
-echo "@@@@ Installing ruby-install on ubuntu... this take a long time..."
+echo "@@@@ Installing ruby-install on ubuntu... this take a LONG time..."
 RUBYINSTALL_VER="0.6.0"
 cd /tmp
 wget -O ruby-install-${RUBYINSTALL_VER}.tar.gz https://github.com/postmodern/ruby-install/archive/v${RUBYINSTALL_VER}.tar.gz
