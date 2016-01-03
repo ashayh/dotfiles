@@ -15,7 +15,7 @@ else
   exit 1
 fi
 
-PKGS=(curl git grc mercurial source-highlight ruby-dev tmux vim unzip wget zsh tree shellcheck autossh git-extras nmap httpie unrar wireshark build-essential cmake python2.7-dev git-flow)
+PKGS=(curl git grc mercurial source-highlight ruby-dev tmux vim unzip wget zsh tree shellcheck autossh git-extras nmap httpie unrar wireshark build-essential cmake python2.7-dev git-flow inotify-tools)
 echo
 echo "Installing ${PKGS[*]}..."
 
@@ -70,6 +70,23 @@ else
   ~/.fzf/install
 fi
 cd
+
+echo "@@@@ Installing chruby on ubuntu..."
+CHRUBY_VER="0.3.9"
+cd /tmp
+wget -O chruby-${CHRUBY_VER}.tar.gz https://github.com/postmodern/chruby/archive/v${CHRUBY_VER}.tar.gz
+tar -xzvf chruby-${CHRUBY_VER}.tar.gz
+cd chruby-${CHRUBY_VER}/
+sudo ./scripts/setup.sh
+
+echo "@@@@ Installing ruby-install on ubuntu... this take a long time..."
+RUBYINSTALL_VER="0.6.0"
+cd /tmp
+wget -O ruby-install-${RUBYINSTALL_VER}.tar.gz https://github.com/postmodern/ruby-install/archive/v${RUBYINSTALL_VER}.tar.gz
+tar -xzvf ruby-install-${RUBYINSTALL_VER}.tar.gz
+cd ruby-install-${RUBYINSTALL_VER}/
+sudo make install
+
 
 echo "Running zsh:"
 zsh
