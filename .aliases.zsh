@@ -99,7 +99,7 @@ ssh_root ()  {
   then
     echo "Provide hostname no to connect to."
   else
-    ssh -q -X -l root ${host}
+    autossh -q -X -l root ${host}
   fi
 }
 
@@ -165,6 +165,15 @@ alias tml='tmux list-sessions'
 
 alias gbuild="go build"
 
-alias ass="autossh"
+assh() {
+  SSHHOST=${1%%.*}
+  if [[ -z $TMUX ]] ; then
+    :
+  else
+    tmux rename-window "${SSHHOST}"
+  fi
+  echo ${SSHHOST}
+  autossh ${*}
+}
 
 alias vp="vimpager"
