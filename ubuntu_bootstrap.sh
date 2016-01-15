@@ -15,7 +15,7 @@ else
   exit 1
 fi
 
-PKGS=(curl git grc mercurial source-highlight ruby-dev tmux vim unzip wget zsh tree shellcheck autossh git-extras nmap httpie unrar wireshark build-essential cmake python2.7-dev git-flow inotify-tools xclip)
+PKGS=(curl git grc mercurial source-highlight ruby-dev tmux vim unzip wget zsh tree shellcheck autossh git-extras nmap httpie unrar wireshark build-essential cmake python2.7-dev git-flow inotify-tools xclip ngrok-server ngrok-client)
 echo
 echo "Installing ${PKGS[*]}..."
 

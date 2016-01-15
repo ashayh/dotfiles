@@ -19,7 +19,7 @@ fi
 
 export HOMEBREW_GITHUB_API_TOKEN=XX
 
-PKGS=(curl git grc mercurial source-highlight tmux wget jq hub gnu-sed cheat awscli autossh packer grc vimpager git-extras nmap httpie brew-cask ipcalc unrar wireshark tree ssh-copy-id awscli ag fzf shellcheck git-radar yank cig fpp ghi gist git-open hr)
+PKGS=(curl git grc mercurial source-highlight tmux wget jq hub gnu-sed cheat awscli autossh packer grc vimpager git-extras nmap httpie brew-cask ipcalc unrar wireshark tree ssh-copy-id awscli ag fzf shellcheck git-radar yank cig fpp ghi gist git-open hr ngrok osxutil)
 echo
 echo "Installing ${PKGS[*]}..."
 

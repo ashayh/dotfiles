@@ -18,3 +18,4 @@ fi
 # ------------
 source "/home/ashay/.fzf/shell/key-bindings.zsh"
 
+export FZF_DEFAULT_OPTS="-e"
