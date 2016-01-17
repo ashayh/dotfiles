@@ -196,3 +196,7 @@ done
 if [[ -f /usr/local/bin/virtualenvwrapper.sh ]]; then
   source /usr/local/bin/virtualenvwrapper.sh
 fi
+
+if [[ -n "${GOPATH+x}" ]] ; then
+  [[ -d $GOPATH/src/github.com/ashayh ]] || mkdir -p $GOPATH/src/github.com/ashayh
+fi
