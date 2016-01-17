@@ -160,7 +160,11 @@ export LESSOPEN="| /usr/share/source-highlight/src-hilite-lesspipe.sh %s"
 export LESS='-XF -R '
 
 # go lang
-[[ -s ~/.gvm/scripts/gvm ]] && source ~/.gvm/scripts/gvm
+if [[ -s ~/.gvm/scripts/gvm ]] ; then
+  source ~/.gvm/scripts/gvm
+  export GO15VENDOREXPERIMENT=1
+  gvm use go1.5.3
+fi
 # [[ -d ~/go ]] || mkdir -p ~/go
 # export GOPATH="~/go"
 export PATH=$PATH:${GOPATH}/bin
