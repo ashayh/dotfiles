@@ -95,39 +95,6 @@ filetype plugin indent on
 let mapleader=","
 
 " ----------------------------------------
-" Platform Specific Configuration
-" ----------------------------------------
-
-if has('win32') || has('win64')
-  " Windows
-  source $VIMRUNTIME/mswin.vim
-  set guifont=Consolas:h10
-  set guioptions-=T " Toolbar
-  set guioptions-=m " Menubar
-
-  " Set height and width on Windows
-  set lines=60
-  set columns=120
-
-  " Windows has a nasty habit of launching gVim in the wrong working directory
-  cd ~
-elseif has('gui_macvim')
-  " MacVim
-
-  " Custom Menlo font for Powerline
-  " From: https://github.com/Lokaltog/vim-powerline/wiki/Patched-fonts
-  set guifont=Menlo\ for\ Powerline:h12
-
-  " Hide Toolbar in MacVim
-  if has("gui_running")
-    set guioptions=egmrt
-  endif
-
-  " Use option (alt) as meta key.
-  set macmeta
-endif
-
-" ----------------------------------------
 " Regular Vim Configuration (No Plugins Needed)
 " ----------------------------------------
 
@@ -216,7 +183,7 @@ set list
 " Reset the listchars
 set listchars=""
 " a tab should display as "  ", trailing whitespace as "."
-set listchars=tab:▸\  " Indentended trailing whitespace
+set listchars=tab:•\  " Indentended trailing whitespace
 " show trailing spaces as dots
 set listchars+=trail:•
 " The character to show in the last column when wrap is off and the line
@@ -412,14 +379,8 @@ let g:syntastic_auto_loc_list=1
 let g:syntastic_error_symbol='✗'
 let g:syntastic_warning_symbol='⚠'
 let g:syntastic_mode_map = { 'mode': 'active',
-                           \ 'active_filetypes': ['ruby', 'puppet', 'sh', 'python', 'chef'],
+                           \ 'active_filetypes': ['ruby', 'puppet', 'sh', 'python', 'chef', 'go'],
                            \ 'passive_filetypes': [] }
-
-" Platform-specific config files
-if has('win32') || has('win64')
-  let g:syntastic_jsl_conf=$HOME.'/.vim/config/windows/syntastic/jsl.conf'
-  let g:syntastic_disabled_filetypes=['sh'] " Disable .sh on Windows
-endif
 
 " ---------------
 " NERDTree
