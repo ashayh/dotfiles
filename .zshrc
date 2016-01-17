@@ -200,4 +200,5 @@ fi
 if [[ -n "${GOPATH+x}" ]] ; then
   [[ -d $GOPATH/src/github.com/ashayh ]] || mkdir -p $GOPATH/src/github.com/ashayh
   [[ -d $GOPATH/src/bitbucket.org/ashayh ]] || mkdir -p $GOPATH/src/github.com/ashayh
+  export PATH=${PATH}:${HOME}/go/bin
 fi
