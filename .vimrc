@@ -42,7 +42,6 @@ Plug 'xolox/vim-session'
 Plug 'Raimondi/delimitMate'
 Plug 'scrooloose/syntastic'
 Plug 'gregsexton/MatchTag'
-"Plug 'Shougo/neocomplcache'
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-haml'
 Plug 'tpope/vim-rails'
@@ -245,9 +244,6 @@ else
   nmap <M-d> <C-b>
 endif
 
-" Overrides neocomplcache with regular keyword completion
-" inoremap <expr><C-k>  "\<C-x><C-n>"
-
 " Use ; for : in normal and visual mode, less keystrokes
 nnoremap ; :
 vnoremap ; :
@@ -340,29 +336,7 @@ nmap <leader>fef ggVG=
 " Disables space mappings in select mode to fix snipMate.
 " let g:space_disable_select_mode=1
 
-" ---------------
-" Neocachecompl
-" ---------------
-"let g:neocomplcache_enable_at_startup=1
-"let g:neocomplcache_enable_cursor_hold_i=1
-"let g:neocomplcache_cursor_hold_i_time=200
-"let g:neocomplcache_auto_completion_start_length=1
-
-" Tab / Shift-Tab to cycle completions
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<S-TAB>"
-
-" Required to make neocomplcache_cursor_hold_i_time work
-" See https://github.com/Shougo/neocomplcache/issues/140
 let s:update_time_save = &updatetime
-" autocmd InsertEnter * call s:on_insert_enter()
-
-"function! s:on_insert_enter()
-"  if &updatetime > g:neocomplcache_cursor_hold_i_time
-"    let s:update_time_save = &updatetime
-"    let &updatetime = g:neocomplcache_cursor_hold_i_time
-"  endif
-"endfunction
 
 autocmd InsertLeave * call s:on_insert_leave()
 
@@ -783,3 +757,9 @@ nnoremap <leader>5 m`^i##### <esc>``6l
 
 " Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
 vmap <Enter> <Plug>(EasyAlign)
+
+let g:UltiSnipsExpandTrigger="<c-h>"
+let g:UltiSnipsJumpForwardTrigger="<c-h>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+
+let g:ycm_seed_identifiers_with_syntax = 1
