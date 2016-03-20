@@ -167,13 +167,18 @@ alias gbuild="go build"
 
 assh() {
   SSHHOST=${1%%.*}
+  if dig +short ${1} >/dev/null 2>&1 ; then
+    IP_OF_HOST=$(dig +short ${1})
+  fi
   if [[ -z $TMUX ]] ; then
     :
   else
     tmux rename-window "${SSHHOST}"
   fi
   echo ${SSHHOST}
-  autossh ${*}
+  #autossh ${*}
+  echo autossh ${IP_OF_HOST}
+  autossh $(echo -n ${IP_OF_HOST})
 }
 
 alias vp="vimpager"
@@ -196,3 +201,7 @@ pidtree() (
     walk $i
   done
 )
+
+alias frewttr="curl 'wttr.in/Fremont,CA?m'"
+alias mumwttr="curl 'wttr.in/Mumbai?m'"
+alias sfwttr="curl 'wttr.in/San Francisco,CA?m'"
