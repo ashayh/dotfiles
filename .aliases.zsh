@@ -176,9 +176,9 @@ assh() {
     tmux rename-window "${SSHHOST}"
   fi
   echo ${SSHHOST}
-  #autossh ${*}
-  echo autossh ${IP_OF_HOST}
-  autossh $(echo -n ${IP_OF_HOST})
+  autossh ${*}
+  #echo autossh ${IP_OF_HOST}
+  #autossh $(echo -n ${IP_OF_HOST})
 }
 
 alias vp="vimpager"

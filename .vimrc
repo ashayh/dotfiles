@@ -763,3 +763,5 @@ let g:UltiSnipsJumpForwardTrigger="<c-h>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 let g:ycm_seed_identifiers_with_syntax = 1
+
+let g:ycm_path_to_python_interpreter = '/usr/local/bin/python'
