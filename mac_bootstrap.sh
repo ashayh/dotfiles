@@ -19,7 +19,8 @@ fi
 
 export HOMEBREW_GITHUB_API_TOKEN=XX
 
-PKGS=(curl git grc mercurial source-highlight tmux wget jq hub gnu-sed cheat awscli autossh packer grc vimpager git-extras nmap httpie brew-cask ipcalc unrar wireshark tree ssh-copy-id awscli ag fzf shellcheck git-radar yank cig fpp ghi gist git-open hr ngrok osxutil)
+
+PKGS=(curl git grc mercurial source-highlight tmux wget jq hub gnu-sed cheat awscli autossh packer grc vimpager git-extras nmap httpie brew-cask ipcalc unrar wireshark tree ssh-copy-id awscli ag fzf shellcheck yank cig fpp ghi gist git-open hr osxutil)
 echo
 echo "Installing ${PKGS[*]}..."
 
@@ -31,6 +32,8 @@ else
   echo "brew install ${PKGS[*]} failed..exiting..."
   exit 1
 fi
+brew install homebrew/binary/ngrok2
+brew install michaeldfallen/formula/git-radar
 
 echo
 echo "Cloning from github.com/ashayh/dotfiles.git..."
