@@ -172,6 +172,11 @@ export PATH=$PATH:${GOPATH}/bin
 if which chef >/dev/null 2>&1
 then
   eval "$(chef shell-init $(basename $SHELL))"
+  echo "not using Chef ruby as brew vim does not use it."
+  export PATH=/usr/local/bin/:${PATH}
+  unset GEM_ROOT
+  unset GEM_HOME
+  unset GEM_PATH
 fi
 
 DISABLE_AUTO_TITLE="true"
