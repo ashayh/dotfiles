@@ -88,9 +88,9 @@ cd ruby-install-${RUBYINSTALL_VER}/
 sudo make install
 
 
-echo "Running zsh:"
-zsh
-
 echo
 echo "Running ~/dotfiles/create_dotfiles_etc..."
 ~/dotfiles/create_dotfiles_etc
+
+echo "Running zsh:"
+zsh
