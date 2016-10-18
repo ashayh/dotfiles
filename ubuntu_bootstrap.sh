@@ -59,8 +59,14 @@ else
 fi
 
 mkdir -p .vim
-cd ~/.vim 
-test -d .git-radar/.git || git clone https://github.com/michaeldfallen/git-radar .git-radar
+cd ~/.vim
+if [[ -d ~/.git-radar ]] ; then
+  :
+else
+  git clone https://github.com/michaeldfallen/git-radar ~/.git-radar
+  rm -f ~/bin/git-radar
+  ln -s ~/.git-radar/git-radar ~/bin/git-radar
+fi
 
 cd
 if [[ -f ~/.fzf/.git ]] ; then
