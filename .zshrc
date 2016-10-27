@@ -169,12 +169,16 @@ fi
 # export GOPATH="~/go"
 export PATH=$PATH:${GOPATH}/bin
 
-if which chef >/dev/null 2>&1
+if [[ $(uname) == "Darwin" ]]
 then
   eval "$(chef shell-init $(basename $SHELL))"
   echo "not using Chef ruby as brew vim does not use it."
+  echo "use full Chef gem path to install Chef gems"
   export PATH=/usr/local/bin:${PATH}
-  echo "ruby is: $(which ruby)"
+  PATH_RUBY=$(dirname $(readlink $(which ruby)))
+  export PATH=/usr/local/bin:${PATH_RUBY}:${PATH}
+  echo "ruby is: $(readlink $(which ruby))"
+  echo "gem is: $(which gem)"
   unset GEM_ROOT
   unset GEM_HOME
   unset GEM_PATH
