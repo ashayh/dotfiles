@@ -19,8 +19,9 @@ fi
 
 export HOMEBREW_GITHUB_API_TOKEN=XX
 
+gem install pygments.rb --user-install
 
-PKGS=(curl git grc mercurial source-highlight tmux wget jq hub gnu-sed cheat awscli autossh packer grc vimpager git-extras nmap httpie brew-cask ipcalc unrar wireshark tree ssh-copy-id awscli ag fzf shellcheck yank cig fpp ghi gist git-open hr osxutils)
+PKGS=(curl git grc mercurial source-highlight tmux wget jq hub gnu-sed cheat awscli autossh packer grc vimpager git-extras nmap httpie ipcalc unrar wireshark tree ssh-copy-id awscli ag fzf shellcheck yank cig fpp ghi gist git-open hr osxutils)
 echo
 echo "Installing ${PKGS[*]}..."
 
