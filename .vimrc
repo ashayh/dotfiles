@@ -84,6 +84,7 @@ Plug 'kshenoy/vim-signature'
 Plug 'justinmk/vim-sneak'
 Plug 'Valloric/YouCompleteMe'
 Plug 'airblade/vim-gitgutter'
+Plug 'terryma/vim-multiple-cursors'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 call plug#end()
 
