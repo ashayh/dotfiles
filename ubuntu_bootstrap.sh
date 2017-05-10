@@ -80,7 +80,7 @@ cd
 echo "@@@@ Installing chruby on ubuntu..."
 CHRUBY_VER="0.3.9"
 cd /tmp
-sudo rm -f chruby-${CHRUBY_VER}*
+sudo rm -rf chruby-${CHRUBY_VER}*
 wget -O chruby-${CHRUBY_VER}.tar.gz https://github.com/postmodern/chruby/archive/v${CHRUBY_VER}.tar.gz
 tar -xzvf chruby-${CHRUBY_VER}.tar.gz
 cd chruby-${CHRUBY_VER}/
@@ -89,7 +89,7 @@ sudo ./scripts/setup.sh
 echo "@@@@ Installing ruby-install on ubuntu... this take a LONG time..."
 RUBYINSTALL_VER="0.6.0"
 cd /tmp
-sudo rm -f ruby-install-*
+sudo rm -rf ruby-install-*
 wget -O ruby-install-${RUBYINSTALL_VER}.tar.gz https://github.com/postmodern/ruby-install/archive/v${RUBYINSTALL_VER}.tar.gz
 tar -xzvf ruby-install-${RUBYINSTALL_VER}.tar.gz
 cd ruby-install-${RUBYINSTALL_VER}/
