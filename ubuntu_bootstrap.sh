@@ -80,6 +80,7 @@ cd
 echo "@@@@ Installing chruby on ubuntu..."
 CHRUBY_VER="0.3.9"
 cd /tmp
+sudo rm -f chruby-${CHRUBY_VER}.tar.gz
 wget -O chruby-${CHRUBY_VER}.tar.gz https://github.com/postmodern/chruby/archive/v${CHRUBY_VER}.tar.gz
 tar -xzvf chruby-${CHRUBY_VER}.tar.gz
 cd chruby-${CHRUBY_VER}/
