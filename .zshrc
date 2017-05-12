@@ -199,13 +199,13 @@ stt_title () { setTerminalText 2 $@; }
 
 export PATH=$PATH:$HOME/.vim/.git-radar
 
-CHRUBY_FILES=(/usr/local/share/chruby/chruby.sh /usr/local/share/chruby/auto.sh)
-for i in ${CHRUBY_FILES[@]}
-do
-  if [[ -f ${i} ]]; then
-    source ${i}
-  fi
-done
+#CHRUBY_FILES=(/usr/local/share/chruby/chruby.sh /usr/local/share/chruby/auto.sh)
+#for i in ${CHRUBY_FILES[@]}
+#do
+#  if [[ -f ${i} ]]; then
+#    source ${i}
+#  fi
+#done
 
 if [[ -f /usr/local/bin/virtualenvwrapper.sh ]]; then
   source /usr/local/bin/virtualenvwrapper.sh
