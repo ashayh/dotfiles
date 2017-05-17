@@ -62,3 +62,5 @@ fi
 
 echo "Running zsh:"
 zsh
+
+brew cask install fluor
