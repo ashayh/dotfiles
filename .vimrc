@@ -85,6 +85,7 @@ Plug 'justinmk/vim-sneak'
 Plug 'Valloric/YouCompleteMe'
 Plug 'airblade/vim-gitgutter'
 Plug 'terryma/vim-multiple-cursors'
+Plug 'christoomey/vim-tmux-navigator'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 call plug#end()
 
