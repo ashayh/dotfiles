@@ -217,3 +217,9 @@ if [[ -n "${GOPATH+x}" ]] ; then
   export PATH=${PATH}:${HOME}/go/bin
   export GO15VENDOREXPERIMENT=1
 fi
+
+. $HOME/.asdf/asdf.sh
+
+if [[ -f /etc/bash_completion.d/g4d ]] ; then
+  source /etc/bash_completion.d/g4d
+fi

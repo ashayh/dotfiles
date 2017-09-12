@@ -86,6 +86,7 @@ Plug 'Valloric/YouCompleteMe'
 Plug 'airblade/vim-gitgutter'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'python-mode/python-mode'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 call plug#end()
 
@@ -776,3 +777,7 @@ endif
 nnoremap S S
 
 set omnifunc=syntaxcomplete#Complete
+
+au FileType python setl shiftwidth=2 tabstop=2
+
+let g:pymode_python = 'python3'
