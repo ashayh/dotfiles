@@ -90,6 +90,7 @@ Plug 'python-mode/python-mode'
 Plug 'tbabej/taskwiki'
 Plug 'powerman/vim-plugin-AnsiEsc'
 Plug 'majutsushi/tagbar'
+Plug 'vimwiki/vimwiki'
 Plug 'farseer90718/vim-taskwarrior'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 call plug#end()
