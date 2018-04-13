@@ -46,12 +46,12 @@ export TERM='screen-256color'
 
 export PATH=$PATH:~/bin
 
-export AWS_IAM_HOME=${HOME}/aws/iamcli
-export EC2_HOME=${HOME}/aws/ec2-api-tools
+#export AWS_IAM_HOME=${HOME}/aws/iamcli
+#export EC2_HOME=${HOME}/aws/ec2-api-tools
 
-export PATH=$PATH:${EC2_HOME}/bin:${AWS_IAM_HOME}/bin
+#export PATH=$PATH:${EC2_HOME}/bin:${AWS_IAM_HOME}/bin
 
-export AWS_CREDENTIAL_FILE=${HOME}/aws/.aws-creds
+#export AWS_CREDENTIAL_FILE=${HOME}/aws/.aws-creds
 
 zlewidget() {
  zle -N $2 $3
