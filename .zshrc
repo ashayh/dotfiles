@@ -163,7 +163,7 @@ export LESS='-XF -R '
 if [[ -s ~/.gvm/scripts/gvm ]] ; then
   source ~/.gvm/scripts/gvm
   export GO15VENDOREXPERIMENT=1
-  gvm use go1.8
+  gvm use go1.10
 fi
 # [[ -d ~/go ]] || mkdir -p ~/go
 # export GOPATH="~/go"
