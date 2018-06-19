@@ -39,11 +39,12 @@ fi
 
 # some more ls aliases
 alias ll='ls -laF'
-alias la='ls -A'
+alias la='ls -la'
 alias l='ls -lF'
 alias lsa='ls -lah'
 alias lh='ls -lh'
 alias ltr='ls -ltr'
+alias lrt='ls -ltr'
 alias sl=ls # often screw this up
 alias mx='chmod a+x'
 alias 000='chmod 000'
@@ -51,6 +52,7 @@ alias 644='chmod 644'
 alias 755='chmod 755'
 
 alias grep='grep --color=auto'
+alias gbrep='grep -a --color=auto'
 alias rbgrep='grep -R --include="*.rb" '
 alias ignore_comment_grep='grep -E -v "^#|^$"'
 
@@ -71,9 +73,6 @@ alias glg='git lg'
 alias gdiff='git diff'
 alias gdw='git diff --color-words=. --color '
 alias gdh='git diff --color | ~/.git/diff-highlight'
-
-# TODO:
-# Add puppet related aliases
 
 if [[ $(uname) == "Darwin" ]]
 then
@@ -155,8 +154,6 @@ alias es_doc_count="ruby -e 'require \"rubygems\";require \"json\"; require \"ap
 
 alias hh="\history -i 0 -1"
 
-alias faux="ps faux"
-
 alias pgrep="pgrep -f"
 
 alias paux="ps aux --noheader |  awk '$3 > 1.0 || $8 !~ /S/ {print $3,$8,$11}' | sort -nr"
@@ -202,6 +199,7 @@ pidtree() (
   done
 )
 
-alias frewttr="curl 'wttr.in/Fremont,CA?m'"
-alias mumwttr="curl 'wttr.in/Mumbai?m'"
-alias sfwttr="curl 'wttr.in/San Francisco,CA?m'"
+alias frewtr="curl 'wttr.in/Fremont,CA?m'"
+alias mumwtr="curl 'wttr.in/Mumbai?m'"
+alias sfwtr="curl 'wttr.in/San Francisco,CA?m'"
+alias mtvwtr="curl 'wttr.in/Mountain View,CA?m'"

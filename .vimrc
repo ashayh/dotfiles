@@ -91,6 +91,11 @@ Plug 'powerman/vim-plugin-AnsiEsc'
 Plug 'majutsushi/tagbar'
 Plug 'vimwiki/vimwiki'
 Plug 'farseer90718/vim-taskwarrior'
+Plug 'tfnico/vim-gradle'
+Plug 'mileszs/ack.vim'
+Plug 'rdolgushin/groovy.vim'
+Plug 'hashivim/vim-hashicorp-tools'
+Plug 'hashivim/vim-terraform'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 call plug#end()
 
@@ -784,4 +789,7 @@ set omnifunc=syntaxcomplete#Complete
 
 au FileType python setl shiftwidth=2 tabstop=2
 
-let g:pymode_python = 'python3'
+let g:pymode_python = 'python'
+
+cnoreabbrev Ack Ack!
+nnoremap <Leader>a :Ack!<Space>
