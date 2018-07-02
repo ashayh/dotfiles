@@ -1,5 +1,3 @@
-#!/bin/bash
-
 declare -a bold=("\033[1m"  "\033[22m");
 declare -a italic=("\033[3m"  "\033[23m");
 declare -a underline=("\033[4m"  "\033[24m");

@@ -234,3 +234,5 @@ source <(kubectl completion zsh)
 
 source ${HOME}/kube-ps1/kube-ps1.sh
 PROMPT='$(kube_ps1)'$PROMPT
+
+export PATH=$PATH:/usr/local/google/bin/
