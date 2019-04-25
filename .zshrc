@@ -42,7 +42,7 @@ fi
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 PATH=$PATH:$HOME/.rvm/bin
 
-export TERM='screen-256color'
+export TERM='tmux-256color'
 
 export PATH=$PATH:~/bin
 
@@ -230,9 +230,10 @@ if [ -f ~/google-cloud-sdk/path.zsh.inc ]; then source ~/google-cloud-sdk/path.z
 # The next line enables shell command completion for gcloud.
 if [ -f ~/google-cloud-sdk/completion.zsh.inc ]; then source ~/google-cloud-sdk/completion.zsh.inc; fi
 
-source <(kubectl completion zsh)
+if kubectl >/dev/null 2>&1
+then
+  source <(kubectl completion zsh)
 
-source ${HOME}/kube-ps1/kube-ps1.sh
-PROMPT='$(kube_ps1)'$PROMPT
-
-export PATH=$PATH:/usr/local/google/bin/
+  source ${HOME}/kube-ps1/kube-ps1.sh
+  PROMPT='$(kube_ps1)'$PROMPT
+fi

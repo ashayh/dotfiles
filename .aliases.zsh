@@ -203,3 +203,9 @@ alias frewtr="curl 'wttr.in/Fremont,CA?m'"
 alias mumwtr="curl 'wttr.in/Mumbai?m'"
 alias sfwtr="curl 'wttr.in/San Francisco,CA?m'"
 alias mtvwtr="curl 'wttr.in/Mountain View,CA?m'"
+
+alias urldecode='python -c "import sys, urllib as ul; \
+  print ul.unquote_plus(sys.argv[1])"'
+
+alias urlencode='python -c "import sys, urllib as ul; \
+  print ul.quote_plus(sys.argv[1])"'
