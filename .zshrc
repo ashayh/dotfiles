@@ -218,22 +218,22 @@ if [[ -n "${GOPATH+x}" ]] ; then
   export GO15VENDOREXPERIMENT=1
 fi
 
-. $HOME/.asdf/asdf.sh
+#. $HOME/.asdf/asdf.sh
 
 if [[ -f /etc/bash_completion.d/g4d ]] ; then
   source /etc/bash_completion.d/g4d
 fi
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f ~/google-cloud-sdk/path.zsh.inc ]; then source ~/google-cloud-sdk/path.zsh.inc; fi
+#if [ -f ~/google-cloud-sdk/path.zsh.inc ]; then source ~/google-cloud-sdk/path.zsh.inc; fi
+#
+## The next line enables shell command completion for gcloud.
+#if [ -f ~/google-cloud-sdk/completion.zsh.inc ]; then source ~/google-cloud-sdk/completion.zsh.inc; fi
 
-# The next line enables shell command completion for gcloud.
-if [ -f ~/google-cloud-sdk/completion.zsh.inc ]; then source ~/google-cloud-sdk/completion.zsh.inc; fi
-
-if kubectl >/dev/null 2>&1
-then
-  source <(kubectl completion zsh)
-
-  source ${HOME}/kube-ps1/kube-ps1.sh
-  PROMPT='$(kube_ps1)'$PROMPT
-fi
+#if kubectl >/dev/null 2>&1
+#then
+#  source <(kubectl completion zsh)
+#
+#  source ${HOME}/kube-ps1/kube-ps1.sh
+#  PROMPT='$(kube_ps1)'$PROMPT
+#fi
