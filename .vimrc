@@ -90,7 +90,6 @@ Plug 'python-mode/python-mode'
 Plug 'powerman/vim-plugin-AnsiEsc'
 Plug 'majutsushi/tagbar'
 Plug 'vimwiki/vimwiki'
-Plug 'farseer90718/vim-taskwarrior'
 Plug 'tfnico/vim-gradle'
 Plug 'mileszs/ack.vim'
 Plug 'rdolgushin/groovy.vim'
@@ -789,7 +788,9 @@ set omnifunc=syntaxcomplete#Complete
 
 au FileType python setl shiftwidth=2 tabstop=2
 
-let g:pymode_python = 'python'
+let g:pymode_python = 'python3'
 
 cnoreabbrev Ack Ack!
 nnoremap <Leader>a :Ack!<Space>
+
+let g:ycm_seed_identifiers_with_syntax = 1
