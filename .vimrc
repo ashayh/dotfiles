@@ -794,3 +794,5 @@ cnoreabbrev Ack Ack!
 nnoremap <Leader>a :Ack!<Space>
 
 let g:ycm_seed_identifiers_with_syntax = 1
+
+let g:python3_host_prog = "/usr/local/bin/python3"

@@ -1,6 +1,6 @@
 [user]
 	name = Ashay Humane
-	email = ahumane@google.com
+ 	email = CHANGE_EMAIL
 
 [color]
         diff = auto
@@ -29,7 +29,7 @@
 [core]
         pager = less -FRSX
         whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
-	editor = /usr/bin/vim
+        editor = nvim
 	excludesfile = ~/.gitignore_global
 
 [alias]
@@ -66,3 +66,7 @@
   newHighlight = "green bold 22"
 [http]
 	cookiefile = ~/.gitcookies
+[commit]
+ gpgSign = true
+[gpg]
+ program = gpg

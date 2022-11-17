@@ -3,7 +3,7 @@
 if source ~/dotfiles/colorize.sh &>/dev/null ; then
  :
 else
-  echo "~/dotfiles/colorize.sh absent? Continue without color..."
+  echo "${HOME}/dotfiles/colorize.sh absent? Continue without color..."
   echo
   for func in red green yellow blue bold
   do
@@ -20,7 +20,7 @@ if [[ ! -d "${HOME}/dotfiles" ]] ; then
 else
   REPO=$(cd ~/dotfiles; git config --get remote.origin.url 2>/dev/null)
   if [[ ${REPO} != *ashayh/dotfiles* ]] ; then
-    echo "~/dotfiles/ is not a git repo or a wrong repo." | red
+    echo "${HOME}/dotfiles/ is not a git repo or a wrong repo." | red
     echo "Follow instructions at: https://github.com/ashayh/dotfiles"
     echo "Exiting..."
     exit 1
@@ -33,7 +33,7 @@ DATE=$(date '+%d-%m-%y-%H-%M-%S')
 CMDS=(zsh hg curl wget vim unzip)
 
 # These are the dirs we will create if absent:
-MAKE_DIRS=(${HOME}/bin ${HOME}/.vim/backup ${HOME}/.vim/tmp ${HOME}/.tmux/plugins ${HOME}/.git/git-templates/hooks)
+MAKE_DIRS=("${HOME}/bin" "${HOME}/.vim/backup" "${HOME}/.vim/tmp" "${HOME}/.tmux/plugins" "${HOME}/.git/git-templates/hooks")
 
 # These are the dotfiles we create as links ~/:
 DOTFILES=(.gitconfig .irbrc .tmux.conf .vimrc .zshrc)
@@ -45,15 +45,17 @@ OH_MY_FILES=(aliases.zsh ashay.zsh-theme)
 # These are the oh-my-zsh plugin repos to clone:
 OH_MY_PLUGINS=(zsh-users/zsh-syntax-highlighting zsh-users/zsh-history-substring-search)
 
+OH_MY_THEMES=(romkatv/powerlevel10k)
+
 # These are the files for ~/bin
 # Includes this shell script :
 BIN_FILES=(create_dotfiles_etc)
 
-for cmd in ${CMDS[*]}
+for cmd in "${CMDS[@]}"
 do
   # Only care if present in \$PATH
-  if which ${cmd} &> /dev/null ; then
-    echo "${cmd} is present at $(which ${cmd})" | green
+  if which "${cmd}" &> /dev/null ; then
+    echo "${cmd} is present at $(which "${cmd}")" | green
   else
     echo "${cmd} is absent or not in \$PATH. Exiting..." | red
     exit 1
@@ -63,24 +65,24 @@ done
 echo
 if [[ -d ${HOME}/.vim && ! -f ${HOME}/.vim/.ashay_dotfiles ]] ; then
   echo "\${HOME}/.vim exists but was not created by this script: \${HOME}/.vim/.ashay_dotfiles is absent?" | yellow | bold
-  echo "Moving ${HOME}/.vim to /tmp/dot_vim.${DATE}" | yellow | bold
-  mv ${HOME}/.vim /tmp/dot_vim.${DATE}
-  echo "Copy /tmp/dot_vim.${DATE} back to your \$HOME to restore old vim config." | yellow | bold
+  echo "Moving ${HOME}/.vim to ${HOME}/dot_vim.${DATE}" | yellow | bold
+  mv "${HOME}/.vim" "${HPME}/.vim.${DATE}"
+  echo "Copy {$HOME}/dot_vim.${DATE} back to your \$HOME to restore old vim config." | yellow | bold
 else
   echo "\${HOME}/.vim exists and was created by this script: \${HOME}/.vim/.ashay_dotfiles is present" | blue | bold
 fi
 
 echo
 echo "Making ${HOME}/.vim only if absent..." | green | bold
-[[ ! -d $HOME/.vim ]] && mkdir ${HOME}/.vim
+[[ ! -d "${HOME}/.vim" ]] && mkdir "${HOME}/.vim"
 
-touch ${HOME}/.vim/.ashay_dotfiles
+touch "${HOME}/.vim/.ashay_dotfiles"
 
-for dir in ${MAKE_DIRS[*]}
+for dir in "${MAKE_DIRS[@]}"
 do
-  if [[ ! -d ${dir} ]] ; then
+  if [[ ! -d "${dir}" ]] ; then
     echo "Creating ${dir} as it is absent..." | blue | bold
-    mkdir -p ${dir}
+    mkdir -p "${dir}"
   fi
 done
 
@@ -103,7 +105,7 @@ else
 fi
 
 echo
-for PLUG in ${OH_MY_PLUGINS[*]}
+for PLUG in "${OH_MY_PLUGINS[@]}"
 do
   # Don't need github username for this comparison.
   PLU_NAME=${PLUG#*/}
@@ -112,31 +114,51 @@ do
     continue
   else
     echo "git cloning ${PLUG}"
-    {
-      cd ${HOME}/.oh-my-zsh/plugins/ ;
-      git clone git://github.com/${PLUG} ;
-    }
+    (
+      cd "${HOME}/.oh-my-zsh/plugins/" ;
+      git clone --depth=1 "https://github.com/${PLUG}" ;
+    )
     if [[ $? -ne 0 ]] ; then
-      echo "Error when git cloning git://github.com/${PLUG}" | red
+      echo "Error when git cloning https://github.com/${PLUG}" | red
+    fi
+  fi
+done
+
+echo
+mkdir -p "${HOME}/.oh-my-zsh/themes"
+for THEME in "${OH_MY_THEMES[@]}"
+do
+  THE_NAME=${THEME#*/}
+  if [[ -d ${HOME}/.oh-my-zsh/themes/${THE_NAME} ]] ; then
+    echo "${HOME}/.oh-my-zsh/plugins/${THE_NAME} exists already, trying next." | green
+    continue
+  else
+    echo "git cloning ${THEME}"
+    (
+      cd "${HOME}/.oh-my-zsh/themes/" ;
+      git clone --depth=1 "https://github.com/${THEME}" ;
+    )
+    if [[ $? -ne 0 ]] ; then
+      echo "Error when git cloning https://github.com/${THEME}" | red
     fi
   fi
 done
 
 echo
 # Link ${HOME}/dotfiles files to ${HOME}/bin
-for file in ${BIN_FILES[*]}
+for file in "${BIN_FILES[@]}"
 do
-  [[ ! -x ${HOME}/dotfiles/${file} ]] && chmod +x ${HOME}/dotfiles/${file}
-  IL=$(readlink ${HOME}/bin/${file})
+  [[ ! -x "${HOME}/dotfiles/${file}" ]] && chmod +x "${HOME}/dotfiles/${file}"
+  IL=$(readlink "${HOME}/bin/${file}")
   if [[ ${IL} != "${HOME}/dotfiles/${file}" ]] ; then
     echo "${IL} ${HOME}/bin/${file} "
     echo "Creating ${HOME}/bin/${file} as link to ${HOME}/dotfiles/${file}" | blue | bold
     if [[ -f ${HOME}/bin/${file} ]] ; then
-      mv ${HOME}/bin/${file} /tmp/${file}.${DATE}
-      echo "moved ${HOME}/bin/${file} to /tmp/${file}.${DATE}" | yellow
+      "mv ${HOME}/bin/${file}" "${HOME}/${file}.${DATE}"
+      echo "moved ${HOME}/bin/${file} to ${HOME}/${file}.${DATE}" | yellow
     fi
     echo
-    ln -s ${HOME}/dotfiles/${file} ${HOME}/bin/${file}
+    ln -s "${HOME}/dotfiles/${file}" "${HOME}/bin/${file}"
   else
     echo "${HOME}/bin/${file} is already ${IL}" | green
   fi
@@ -145,41 +167,43 @@ done
 
 echo
 # copy dot files to ${HOME}/
-for file in ${DOTFILES[*]}
+for file in "${DOTFILES[@]}"
 do
-  IL=$(readlink ${HOME}/${file})
+  IL=$(readlink "${HOME}/${file}")
   if [[ ${IL} != "${HOME}/dotfiles/${file}" ]] ; then
     echo "Creating ${HOME}/${file} as link to ${HOME}/dotfiles/${file}" | blue | bold
     if [[ -f ${HOME}/${file} ]] ; then
-      mv ${HOME}/${file} /tmp/${file}.${DATE}
-      echo "moved ${HOME}/${file} to /tmp/${file}.${DATE}" | yellow
+      mv "${HOME}/${file}" "${HOME}/${file}.${DATE}"
+      echo "moved ${HOME}/${file} to ${HOME}/${file}.${DATE}" | yellow
     fi
-    ln -s ${HOME}/dotfiles/${file} ${HOME}/${file}
+    ln -s "${HOME}/dotfiles/${file}" "${HOME}/${file}"
   else
     echo "${file} is already ${IL}" | green
   fi
   IL=''
 done
 
+${HOME}/dotfiles/change_email.sh
+
 echo
 # copy files zsh theme and alias
-for file in ${OH_MY_FILES[*]}
+for file in "${OH_MY_FILES[@]}"
 do
-  IL=$(readlink ${HOME}/.oh-my-zsh/custom/${file})
+  IL=$(readlink "${HOME}/.oh-my-zsh/custom/${file}")
   if [[ ${IL} != "${HOME}/dotfiles/.${file}" ]] ; then
     echo "Creating ${HOME}/.oh-my-zsh/custom/${file} as link to ${HOME}/dotfiles/.${file}" | blue | bold
     if [[ -f ${HOME}/.oh-my-zsh/custom/${file} ]] ; then
-      mv ${HOME}/.oh-my-zsh/custom/${file} /tmp/${file}.${DATE}
-      echo "moved ${HOME}/${file} to /tmp/${file}.${DATE}" | yellow
+      mv "${HOME}/.oh-my-zsh/custom/${file}" "${HOME}/${file}.${DATE}"
+      echo "moved ${HOME}/${file} to ${HOME}/${file}.${DATE}" | yellow
     fi
-    ln -s ${HOME}/dotfiles/.${file} ${HOME}/.oh-my-zsh/custom/${file}
+    ln -s "${HOME}/dotfiles/.${file}" "${HOME}/.oh-my-zsh/custom/${file}"
   else
     echo "${HOME}/.oh-my-zsh/custom/${file} is already ${IL}" | green
   fi
   IL=''
 done
 
-IL=$(readlink ${HOME}/.fzf.zsh)
+IL=$(readlink "${HOME}"/.fzf.zsh)
 if [[ ${IL} == "${HOME}/dotfiles/.fzf.zsh" ]] ; then
   :
 else
@@ -192,24 +216,12 @@ cp ~/dotfiles/diff-highlight ~/.git/
 set -e
 # TMUX plugins:
 if [[ -d ~/.tmux/plugins/tpm/.git ]] ; then
-  echo "~/.tmux/plugins/tpm/.git exists" | green
+  echo "${HOME}/.tmux/plugins/tpm/.git exists" | green
 else
   echo "cloning ~/.tmux/plugins/tpm/ ..." | green
-  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+  git clone --depth=1 https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 fi
 
-mkdir -p ~/.vim/plugged
-cd ~/.vim/plugged
-if [[ -d YouCompleteMe/.git ]] ; then
-  echo "~/.vim/plugged/YouCompleteMe/.git exists" | green
-else
-  echo "cloning ~/.vim/plugged/YouCompleteMe/ ..." | green
-  git clone https://github.com/Valloric/YouCompleteMe.git
-  cd YouCompleteMe/
-  git submodule update --init --recursive
-  echo "compiling youcompleteme libraries..." | green
-  ./install.py --clang-completer
-fi
 set +e
 cd
 
