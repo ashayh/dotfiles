@@ -5,7 +5,7 @@ ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="ashay"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
@@ -39,19 +39,9 @@ if [[ -d /usr/libexec/java_home ]] ; then
   export JAVA_HOME=$(/usr/libexec/java_home)
 fi
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
-PATH=$PATH:$HOME/.rvm/bin
-
 export TERM='tmux-256color'
 
 export PATH=$PATH:~/bin
-
-#export AWS_IAM_HOME=${HOME}/aws/iamcli
-#export EC2_HOME=${HOME}/aws/ec2-api-tools
-
-#export PATH=$PATH:${EC2_HOME}/bin:${AWS_IAM_HOME}/bin
-
-#export AWS_CREDENTIAL_FILE=${HOME}/aws/.aws-creds
 
 zlewidget() {
  zle -N $2 $3
@@ -89,28 +79,6 @@ autoload -U zargs
 
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
 
-#ZSH_HIGHLIGHT_STYLES+=(
-#  default                       'none'
-#  unknown-token                 'fg=red,bold'
-#  reserved-word                 'fg=yellow'
-#  alias                         'fg=none,bold'
-#  builtin                       'fg=none,bold'
-#  function                      'fg=none,bold'
-#  command                       'fg=none,bold'
-#  hashed-command                'fg=none,bold'
-#  path                          'fg=cyan'
-#  globbing                      'fg=cyan'
-#  history-expansion             'fg=blue'
-#  single-hyphen-option          'fg=magenta'
-#  double-hyphen-option          'fg=magenta'
-#  back-quoted-argument          'fg=magenta,bold'
-#  single-quoted-argument        'fg=green'
-#  double-quoted-argument        'fg=green'
-#  dollar-double-quoted-argument 'fg=cyan'
-#  back-double-quoted-argument   'fg=cyan'
-#  assign                        'none'
-#)
-
 ZSH_HIGHLIGHT_STYLES[single-quoted-argument]=fg=blue,bold
 ZSH_HIGHLIGHT_STYLES[double-quoted-argument]=fg=cyan,bold
 ZSH_HIGHLIGHT_STYLES[globbing]=fg=green,bold
@@ -122,22 +90,6 @@ ZSH_HIGHLIGHT_PATTERNS+=('rm -rf *' 'fg=white,bold,bg=red')
 
 zstyle ':completion:*:manuals' separate-sections true
 zstyle ':completion:*:descriptions' format $'%{\e[0;31m%}completing %B%d%b%{\e[0m%}'''
-
-# Invoke GnuPG-Agent the first time we login.
-# If it exists, use this:
-# if test -f $HOME/.gpg-agent-info && \
-#   kill -0 `grep '^GPG_AGENT_INFO' $HOME/.gpg-agent-info | cut -d: -f 2` 2>/dev/null; then
-#   GPG_AGENT_INFO=`cat $HOME/.gpg-agent-info | cut -c 16-`
-#   GPG_TTY=`tty`
-#   export GPG_TTY
-#   export GPG_AGENT_INFO
-# # Otherwise, it either hasn't been started, or was killed:
-# else
-#   eval `gpg-agent --daemon --no-grab --write-env-file $HOME/.gpg-agent-info`
-#   GPG_TTY=`tty`
-#   export GPG_TTY
-#   export GPG_AGENT_INFO
-# fi
 
 tmuxHashColor() {
   local hsh=$(echo $1 | cksum | cut -d ' ' -f 1)
@@ -156,7 +108,7 @@ ns() {
   tmux attach -t $1
 }
 
-export LESSOPEN="| /usr/share/source-highlight/src-hilite-lesspipe.sh %s"
+export LESSOPEN="| ~/bin/src-hilite-lesspipe.sh %s"
 export LESS='-XF -R '
 
 # go lang
@@ -165,23 +117,12 @@ if [[ -s ~/.gvm/scripts/gvm ]] ; then
   export GO15VENDOREXPERIMENT=1
   gvm use go1.10
 fi
-# [[ -d ~/go ]] || mkdir -p ~/go
-# export GOPATH="~/go"
 export PATH=$PATH:${GOPATH}/bin
 
-if [[ $(uname) == "Darwin" ]]
-then
-  eval "$(chef shell-init $(basename $SHELL))"
-  echo "not using Chef ruby as brew vim does not use it."
-  echo "use full Chef gem path to install Chef gems"
-  export PATH=/usr/local/bin:${PATH}
-  PATH_RUBY=$(dirname $(readlink $(which ruby)))
-  export PATH=/usr/local/bin:${PATH_RUBY}:${PATH}
-  echo "ruby is: $(readlink $(which ruby))"
-  echo "gem is: $(which gem)"
-  unset GEM_ROOT
-  unset GEM_HOME
-  unset GEM_PATH
+if [[ -n "${GOPATH+x}" ]] ; then
+  [[ -d $GOPATH/src/github.com/ashayh ]] || mkdir -p $GOPATH/src/github.com/ashayh
+  [[ -d $GOPATH/src/bitbucket.org/ashayh ]] || mkdir -p $GOPATH/src/github.com/ashayh
+  export PATH=${PATH}:${HOME}/go/bin
 fi
 
 DISABLE_AUTO_TITLE="true"
@@ -197,58 +138,36 @@ stt_title () { setTerminalText 2 $@; }
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-export PATH=$PATH:$HOME/.vim/.git-radar
-
-#CHRUBY_FILES=(/usr/local/share/chruby/chruby.sh /usr/local/share/chruby/auto.sh)
-#for i in ${CHRUBY_FILES[@]}
-#do
-#  if [[ -f ${i} ]]; then
-#    source ${i}
-#  fi
-#done
-
 if [[ -f /usr/local/bin/virtualenvwrapper.sh ]]; then
   source /usr/local/bin/virtualenvwrapper.sh
 fi
-
-if [[ -n "${GOPATH+x}" ]] ; then
-  [[ -d $GOPATH/src/github.com/ashayh ]] || mkdir -p $GOPATH/src/github.com/ashayh
-  [[ -d $GOPATH/src/bitbucket.org/ashayh ]] || mkdir -p $GOPATH/src/github.com/ashayh
-  export PATH=${PATH}:${HOME}/go/bin
-  export GO15VENDOREXPERIMENT=1
-fi
-
-#. $HOME/.asdf/asdf.sh
 
 if [[ -f /etc/bash_completion.d/g4d ]] ; then
   source /etc/bash_completion.d/g4d
 fi
 
-# The next line updates PATH for the Google Cloud SDK.
-#if [ -f ~/google-cloud-sdk/path.zsh.inc ]; then source ~/google-cloud-sdk/path.zsh.inc; fi
-#
-## The next line enables shell command completion for gcloud.
-#if [ -f ~/google-cloud-sdk/completion.zsh.inc ]; then source ~/google-cloud-sdk/completion.zsh.inc; fi
+EDITOR=nvim
+GIT_EDITOR=nvim
 
-#if kubectl >/dev/null 2>&1
-#then
-#  source <(kubectl completion zsh)
-#
-#  source ${HOME}/kube-ps1/kube-ps1.sh
-#  PROMPT='$(kube_ps1)'$PROMPT
-#fi
+alias vim=nvim
+alias vi=nvim
+alias k=kubectl
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/ashay/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/ashay/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/ashay/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/ashay/anaconda3/bin:$PATH"
-    fi
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
-unset __conda_setup
-# <<< conda initialize <<<
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+[[ ! -f  ~/.oh-my-zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]] || source ~/.oh-my-zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+
+command -v kubecolor >/dev/null 2>&1 && alias kubectl="kubecolor"
+
+alias kopen="aws-keycloak open ${1}"
+
+command -v kubectl >/dev/null 2>&1 && source <(kubectl completion zsh)

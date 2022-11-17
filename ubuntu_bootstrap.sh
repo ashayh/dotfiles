@@ -15,7 +15,7 @@ else
   exit 1
 fi
 
-PKGS=(curl git grc mercurial source-highlight ruby-dev tmux vim unzip wget zsh tree shellcheck autossh git-extras nmap httpie unrar wireshark build-essential cmake git-flow inotify-tools xclip mercurial)
+PKGS=(curl git grc mercurial source-highlight ruby-dev tmux neovim unzip wget zsh tree shellcheck autossh git-extras nmap httpie unrar wireshark build-essential cmake git-flow inotify-tools xclip mercurial)
 echo
 echo "Installing ${PKGS[*]}..."
 
@@ -60,45 +60,16 @@ fi
 
 mkdir -p .vim
 cd ~/.vim
-if [[ -d ~/.git-radar ]] ; then
-  :
-else
-  git clone https://github.com/michaeldfallen/git-radar ~/.git-radar
-  rm -f ~/bin/git-radar
-  ln -s ~/.git-radar/git-radar ~/bin/git-radar
-fi
 
 cd
 if [[ -f ~/.fzf/.git ]] ; then
   :
 else
   git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-  ~/.fzf/install
+  ~/.fzf/install --no-bash --zsh --completion --key-bindings
 fi
 cd
-
-echo "@@@@ Installing chruby on ubuntu..."
-CHRUBY_VER="0.3.9"
-cd /tmp
-sudo rm -rf chruby-${CHRUBY_VER}*
-wget -O chruby-${CHRUBY_VER}.tar.gz https://github.com/postmodern/chruby/archive/v${CHRUBY_VER}.tar.gz
-tar -xzvf chruby-${CHRUBY_VER}.tar.gz
-cd chruby-${CHRUBY_VER}/
-sudo ./scripts/setup.sh
-
-echo "@@@@ Installing ruby-install on ubuntu... this take a LONG time..."
-RUBYINSTALL_VER="0.6.0"
-cd /tmp
-sudo rm -rf ruby-install-*
-wget -O ruby-install-${RUBYINSTALL_VER}.tar.gz https://github.com/postmodern/ruby-install/archive/v${RUBYINSTALL_VER}.tar.gz
-tar -xzvf ruby-install-${RUBYINSTALL_VER}.tar.gz
-cd ruby-install-${RUBYINSTALL_VER}/
-sudo make install
-
 
 echo
 echo "Running ~/dotfiles/create_dotfiles_etc..."
 ~/dotfiles/create_dotfiles_etc
-
-echo "Running zsh:"
-zsh
