@@ -30,7 +30,6 @@ fi
 echo "Enter passwd for sudo:"
 sudo apt-get install -y ${PKGS[*]}
 
-echo
 if [[ $? -eq 0 ]] ; then
   echo "apt-get -y install ${PKGS[*]} successful..."
 else
@@ -42,7 +41,6 @@ echo
 echo "Cloning from github.com/ashayh/dotfiles.git..."
 ( cd ~ ; git clone https://github.com/ashayh/dotfiles.git ; )
 
-echo
 if [[ $? -eq 0 ]] ; then
   echo "git clone successful..."
 else
@@ -50,7 +48,6 @@ else
   exit 1
 fi
 
-echo
 if [[ $? -eq 0 ]] ; then
   echo "All done."
 else
