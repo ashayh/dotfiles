@@ -95,6 +95,7 @@ require("indent_blankline").setup {
 -- vim.cmd [[highlight IndentBlanklineIndent1 guibg=#292929 gui=nocombine]]
 -- vim.cmd [[highlight IndentBlanklineIndent2 guibg=#1a1a1a gui=nocombine]]
 -- vim.cmd [[highlight IndentBlanklineIndent2 guibg=#2e2e2e gui=nocombine]]
+
 vim.cmd [[highlight IndentBlanklineIndent2 guibg=#1d1d2b gui=nocombine]]
 
 -- gcc -- normal
@@ -143,6 +144,7 @@ require('nvim-treesitter.configs').setup {
     -- disable = { "jsx", "cpp" }, list of languages you want to disable the plugin for
     extended_mode = true --Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
   }
+
 }
 
 require("bufferline").setup{
@@ -168,6 +170,9 @@ vim.api.nvim_set_keymap('n', '&', "<cmd>lua require'hop'.hint_words()<cr>", {})
 
 require('gitsigns').setup()
 
+-- find and replace
+require('spectre').setup()
+
 _G.__luacache_config = {
   chunks = {
     enable = true,
@@ -185,7 +190,6 @@ vim.cmd([[
 let g:python_host_prog = '/usr/local/bin/python'
 let g:python3_host_prog = '/usr/local/bin/python3'
 ]])
-
 
 
 -- vim.cmd([[
@@ -265,7 +269,6 @@ function _lazygit_toggle()
 end
 
 vim.api.nvim_set_keymap("n", "<leader>g", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true})
-
 
 -- CoC --
 -- CoC --
