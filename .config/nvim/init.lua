@@ -36,6 +36,10 @@ function imap(shortcut, command)
   map('i', shortcut, command)
 end
 
+function vmap(shortcut, command)
+  map('v', shortcut, command)
+end
+
 nmap("<leader>e", ":lopen<cr>")
 nmap("<leader>w", ":lclose<cr>")
 
@@ -45,15 +49,17 @@ require('get-plugins')
 -- vim.cmd("colorscheme jellybeans")
 -- vim.cmd("colorscheme tokyonight")
 -- vim.cmd("colorscheme gruvbox")
--- vim.cmd("colorscheme carbonfox")
--- vim.g.lightline = { colorscheme = "nightfox" }
+vim.cmd("colorscheme nightfox")
+-- vim.cmd("colorscheme nordfox")
+-- vim.g.lightline = { colorscheme = "nordfox" }
 -- vim.cmd("colorscheme onedarker")
--- require('onedark').setup {
---     style = 'darker'
--- }
+-- vim.cmd("colorscheme onedark")
+--  require('onedark').setup {
+--      style = 'darker'
+--  }
 -- require('onedark').load()
 -- vim.cmd("colorscheme dracula")
-vim.cmd("colorscheme everforest")
+-- vim.cmd("colorscheme everforest")
 
 -- netrw stuff {{{
 vim.cmd([[
@@ -89,7 +95,7 @@ require("indent_blankline").setup {
 -- vim.cmd [[highlight IndentBlanklineIndent1 guibg=#292929 gui=nocombine]]
 -- vim.cmd [[highlight IndentBlanklineIndent2 guibg=#1a1a1a gui=nocombine]]
 -- vim.cmd [[highlight IndentBlanklineIndent2 guibg=#2e2e2e gui=nocombine]]
-vim.cmd [[highlight IndentBlanklineIndent2 guibg=#333333 gui=nocombine]]
+vim.cmd [[highlight IndentBlanklineIndent2 guibg=#1d1d2b gui=nocombine]]
 
 -- gcc -- normal
 -- gc -- visual
@@ -131,7 +137,12 @@ require('nvim-treesitter.configs').setup {
     -- Using this option may slow down your editor, and you may see some duplicate highlights.
     -- Instead of true it can also be a list of languages
     -- additional_vim_regex_highlighting = false,
-  ensure_installed = { "bash", "c", "java", "lua", "python", "ruby", "rust" }
+  ensure_installed = { "bash", "c", "java", "lua", "python", "ruby", "rust" },
+  rainbow = {
+    enable = true,
+    -- disable = { "jsx", "cpp" }, list of languages you want to disable the plugin for
+    extended_mode = true --Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
+  }
 }
 
 require("bufferline").setup{
@@ -157,9 +168,6 @@ vim.api.nvim_set_keymap('n', '&', "<cmd>lua require'hop'.hint_words()<cr>", {})
 
 require('gitsigns').setup()
 
--- find and replace
-require('spectre').setup()
-
 _G.__luacache_config = {
   chunks = {
     enable = true,
@@ -171,6 +179,14 @@ _G.__luacache_config = {
   }
 }
 require('impatient')
+require("nvim-tree").setup()
+
+vim.cmd([[
+let g:python_host_prog = '/usr/local/bin/python'
+let g:python3_host_prog = '/usr/local/bin/python3'
+]])
+
+
 
 -- vim.cmd([[
 -- nmap <silent> gL <cmd>CocDiagnostics<CR>
@@ -194,6 +210,62 @@ vim.cmd([[
 vim.cmd([[
 let g:lastplace_ignore_buftype = "quickfix,nofile,help"
 ]])
+
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
+vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
+vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
+vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+
+-- nmap("<leader>e", ":lopen<cr>")
+-- nmap("<leader>w", ":lclose<cr>")
+
+nmap("<leader>S",":lua require('spectre').open()<cr>")
+
+ -- search current word
+nmap("<leader>sw", ":lua require('spectre').open_visual({select_word=true})<cr>")
+vmap("<leader>s", "<esc>:lua require('spectre').open_visual()<cr>")
+ -- search in current file
+nmap("<leader>sp", "viw:lua require('spectre').open_file_search()<cr>")
+
+require("toggleterm").setup{}
+
+local wk = require("which-key")
+wk.register(mappings, opts)
+
+-- nmap("<leader>u", ":UndotreeToggle<cr>")
+wk.register({
+  ["<leader>u"] = { "<cmd>UndotreeToggle<cr>", "Undo Tree" },
+  ["<leader>t"] = { "<cmd>NvimTreeToggle<cr>", "Open nvim Tree" },
+  ["<leader>tf"] = { "<cmd>NvimTreeFocus<cr>", "Open nvim Tree & focus" },
+  ["<leader>tt"] = { "<cmd>ToggleTerm<cr>", "Terminal Toggle (mouse to move to file)" },
+})
+
+local Terminal  = require('toggleterm.terminal').Terminal
+local lazygit = Terminal:new({
+  cmd = "lazygit",
+  dir = "git_dir",
+  direction = "float",
+  float_opts = {
+    border = "double",
+  },
+  -- function to run on opening the terminal
+  on_open = function(term)
+    vim.cmd("startinsert!")
+    vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", {noremap = true, silent = true})
+  end,
+  -- function to run on closing the terminal
+  on_close = function(term)
+    vim.cmd("startinsert!")
+  end,
+})
+
+function _lazygit_toggle()
+  lazygit:toggle()
+end
+
+vim.api.nvim_set_keymap("n", "<leader>g", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true})
+
 
 -- CoC --
 -- CoC --

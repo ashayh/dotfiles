@@ -16,7 +16,11 @@ return require("packer").startup(function()
   use "bronson/vim-trailing-whitespace" -- https://github.com/bronson/vim-trailing-whitespace
 
   use 'phaazon/hop.nvim'
-  use 'kien/ctrlp.vim'
+  use {
+    'nvim-telescope/telescope.nvim', tag = '0.1.0',
+    -- or                       , branch = '0.1.x',
+    requires = { {'nvim-lua/plenary.nvim'} }
+  }
   use {
     'lukas-reineke/indent-blankline.nvim',
   }
@@ -31,6 +35,8 @@ return require("packer").startup(function()
   use 'sainnhe/everforest'
   use 'dracula/vim'
   use 'navarasu/onedark.nvim'
+
+  use {'wookayin/semshi', ft = 'python', config = 'vim.cmd [[UpdateRemotePlugins]]'}
 
 
   use 'tpope/vim-surround'
@@ -61,15 +67,25 @@ return require("packer").startup(function()
   use 'tomtom/tlib_vim'
   use 'xolox/vim-misc'
 
-  use 'luochen1990/rainbow'
+  -- use 'luochen1990/rainbow'
+  use 'p00f/nvim-ts-rainbow'
   use 'preservim/tagbar'
   use 'mbbill/undotree'
+
+  use { 'folke/which-key.nvim',
+    config = function()
+      require("which-key").setup {
+      }
+    end
+  }
 
   use 'junegunn/vim-easy-align'
   use 'tpope/vim-tbone'
   use 'aserowy/tmux.nvim'
 
+  -- find and replace
   use 'windwp/nvim-spectre'
+  -- "" to open dialog
   use 'gennaro-tedesco/nvim-peekup'
   use 'gbprod/yanky.nvim'
   use 'b3nj5m1n/kommentary'
@@ -103,9 +119,18 @@ return require("packer").startup(function()
   use "rhysd/vim-clang-format"          -- https://github.com/rhysd/vim-clang-format
   use 'dense-analysis/ale' -- prefer Coc
 
-  use 'nvim-tree/nvim-tree.lua'
   use 'nvim-lua/plenary.nvim'
   use 'nvim-tree/nvim-web-devicons'
+  use {"akinsho/toggleterm.nvim", tag = '*', config = function()
+    require("toggleterm").setup()
+  end}
+  use {
+    'nvim-tree/nvim-tree.lua',
+    requires = {
+      'nvim-tree/nvim-web-devicons', -- optional, for file icons
+    },
+    tag = 'nightly' -- optional, updated every week. (see issue #1193)
+  }
 
   use {
       "nvim-treesitter/nvim-treesitter",      -- https://github.com/nvim-treesitter/nvim-treesitter
