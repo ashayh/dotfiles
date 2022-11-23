@@ -183,7 +183,7 @@ do
   IL=''
 done
 
-${HOME}/dotfiles/change_email.sh
+"${HOME}/dotfiles/change_email.sh"
 
 echo
 # copy files zsh theme and alias
